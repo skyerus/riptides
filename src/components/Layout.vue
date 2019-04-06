@@ -7,12 +7,12 @@
             fixed
             clipped
         >
-        <router-link v-for="page in pages" :to="{ path: page.url }">
-            <div class="grid-container-4 pb-3 pt-3">
-                <div class="col-1 justify-self-center"><v-icon>{{ page.icon }}</v-icon></div>
-                <div class="col-2 align-self-center">{{ page.title }}</div>
-            </div>
-        </router-link>
+            <router-link v-for="page in pages" :to="{ path: page.url }">
+                <div class="grid-container-4 pb-3 pt-3">
+                    <div class="col-1 justify-self-center"><v-icon>{{ page.icon }}</v-icon></div>
+                    <div class="col-2 align-self-center">{{ page.title }}</div>
+                </div>
+            </router-link>
         </v-navigation-drawer>
         <v-toolbar app fixed clipped-left dark id="toolbar">
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
@@ -51,7 +51,7 @@
             </v-toolbar-items>
         </v-toolbar>
         <v-content>
-            <v-container dark fluid pt-2>
+            <v-container dark fluid class="pa-0">
                 <slot></slot>
             </v-container>
         </v-content>
