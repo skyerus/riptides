@@ -2,7 +2,6 @@
     <div>
         <v-navigation-drawer
             v-model="drawer"
-            app
             dark
             fixed
             clipped
