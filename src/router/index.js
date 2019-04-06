@@ -1,5 +1,6 @@
 import Router from 'vue-router'
 const Home = () => import('../pages/Home.vue')
+const Tide = () => import('../pages/Tide.vue')
 
 const routes = [
   {
@@ -7,6 +8,11 @@ const routes = [
     name: 'home',
     component: Home
   },
+  {
+    path: '/',
+    name: 'tide',
+    component: Tide
+  }
 ];
 
 export default new Router({
