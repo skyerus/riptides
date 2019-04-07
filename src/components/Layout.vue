@@ -3,6 +3,7 @@
         <v-navigation-drawer
             v-model="drawer"
             dark
+            app
             fixed
             clipped
         >
@@ -84,7 +85,7 @@
     },
     data() {
       return {
-        drawer: null,
+        drawer: false,
         signupPopup: false,
         timeout: 3000
       }
