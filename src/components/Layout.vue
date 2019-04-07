@@ -159,7 +159,6 @@
     },
     sockets: {
       notAuthenticated: function (data) {
-        console.log('notAuthenticated');
         if (this.$store.getters.isLoggedIn) {
           handler.handleSocketError(401);
         }

@@ -42,10 +42,8 @@
     data() {
       return {
         message: '',
-        logs: [
-          'Test message 1',
-          'Test message 2'
-        ]
+        logs: [],
+        participants: {}
       }
     },
     computed: {
@@ -61,20 +59,43 @@
       },
 
       joinTide() {
-        this.$socket.emit('join', 'testing')
+        this.$socket.emit('join', {
+          room: 'testing',
+          user: this.$store.getters.myUser
+        })
       },
     },
     sockets: {
       message: function (data) {
-        this.logs.push(data.msg)
+        this.logs.push(data);
         this.message = ''
       },
-      test: function (data) {
-        console.log(`User receives: ${data.msg}`);
-      },
+
       error: function (data) {
         handler.handleSocketError(data);
       },
+
+      join: function (data) {
+        let username = data.user.username;
+        if (username.length > 0) {
+          this.logs.push({
+            type: 'italic',
+            message: `${username} joined`
+          })
+          delete data.user.username;
+          this.participants[username] = data.user;
+        }
+      },
+
+      leave: function (data) {
+        if (data.length > 0) {
+          this.logs.push({
+            type: 'italic',
+            message: `${data} left`
+          })
+          delete this.participants[data];
+        }
+      }
     },
     watch: {
       isLoggedIn(val) {

@@ -1,7 +1,8 @@
 <template>
     <div class="overflow-auto" ref="chat">
         <template v-for="(item, index) in logs">
-            <v-subheader v-if="item" :key="index" class="medium-text">{{ item }}</v-subheader>
+            <v-subheader v-if="item.type === 'standard'" :key="index" class="medium-text">{{ item.message }}</v-subheader>
+            <div v-if="item.type === 'italic'" :key="index" class="font-italic pl-3 small-text">{{ item.message }}</div>
             <v-divider class="mb-2 mt-2"/>
         </template>
     </div>
@@ -43,7 +44,7 @@
     mounted() {
       this.$refs.chat.addEventListener('scroll', () => this.scroll());
     },
-    destroyed() {
+    beforeDestroy() {
       this.$refs.chat.removeEventListener('scroll', () => this.scroll());
     }
   }
