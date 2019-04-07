@@ -1,5 +1,6 @@
 const getDefaultState = () => {
   return {
+    isLoggedIn: false,
     loginPopup: false,
     loginError: '',
     signupError: '',
@@ -21,6 +22,7 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const getters = {
+  isLoggedIn: state => state.isLoggedIn,
   loginPopup: state => state.loginPopup,
   snackbarActive: state => state.snackbar.active,
   snackbarText: state => state.snackbar.text,
@@ -28,10 +30,17 @@ const getters = {
   loginError: state => state.loginError,
   signupError: state => state.signupError,
   config: state => state.config,
-  spotify: state => state.config.spotify
+  spotify: state => state.config.spotify,
 };
 
 const actions = {
+  toggleLoggedIn({commit, state}, loggedIn) {
+    this._vm.$socket.close();
+    this._vm.$socket.io.opts.query = {token: this.getters.headers.Authorization};
+    this._vm.$socket.open();
+    commit('toggleLoggedIn', loggedIn);
+  },
+
   switchLoginPopup({commit, state}, loginPopup) {
     commit('switchLoginPopup', loginPopup);
   },
@@ -77,6 +86,10 @@ const actions = {
 };
 
 const mutations = {
+  toggleLoggedIn(state, isLoggedIn) {
+    state.isLoggedIn = isLoggedIn;
+  },
+
   switchLoginPopup(state, loginPopup) {
     state.loginPopup = loginPopup;
   },

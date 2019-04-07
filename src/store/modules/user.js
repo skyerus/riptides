@@ -1,6 +1,5 @@
 const getDefaultState = () => {
   return {
-    isLoggedIn: false,
     usernameInput: '',
     email: '',
     following: null,
@@ -20,7 +19,6 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const getters = {
-  isLoggedIn: state => state.isLoggedIn,
   email: state => state.email,
   usernameInput: state => state.usernameInput,
   username: state => state.myUser.username,
@@ -39,9 +37,6 @@ const actions = {
   },
   updateEmail({commit}, email) {
     commit('updateEmail', email);
-  },
-  toggleLoggedIn({commit, state}, loggedIn) {
-    commit('toggleLoggedIn', loggedIn);
   },
   resetUserState({commit}) {
     commit('resetState');
@@ -79,9 +74,6 @@ const actions = {
 };
 
 const mutations = {
-  toggleLoggedIn(state, isLoggedIn) {
-    state.isLoggedIn = isLoggedIn;
-  },
   updateUsernameInput(state, username) {
     state.usernameInput = username;
   },

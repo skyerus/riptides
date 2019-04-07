@@ -8,6 +8,10 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
 
+if (process.env.APP_ENV === 'local') {
+  Vue.config.devtools = true
+}
+
 export const store = new Vuex.Store({
   modules: {
     index,

@@ -82,11 +82,12 @@
     methods: {
       login() {
         UserApi.login(this.password).then((response) => {
-          this.$store.dispatch('toggleLoggedIn', true).then(() => {
-            this.open = false;
-          });
           this.$store.dispatch('updateToken', response.data.token).then(() => {
-            UserApi.getMyConfig();
+            UserApi.getMyConfig().then(() => {
+              this.$store.dispatch('toggleLoggedIn', true).then(() => {
+                this.open = false;
+              });
+            });
           });
           this.$store.dispatch('showSnackbar', 'Welcome back ' + this.$store.getters.usernameInput);
         });

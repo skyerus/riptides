@@ -21,23 +21,21 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = process.env.API_URL;
 
-if (store.getters.isLoggedIn) {
-  let options = {
-    query: {token: store.getters.headers.Authorization}
-  };
-  let socketUrl = process.env.SOCKET_URL;
+let socketUrl = process.env.CHAT_SOCKET_URL;
 
-  Vue.use(new VueSocketIO({
-      debug: true,
-      connection: SocketIO(socketUrl, options),
-      vuex: {
-        store,
-        actionPrefix: "SOCKET_",
-        mutationPrefix: "SOCKET_"
-      }
-    })
-  );
-}
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: SocketIO(socketUrl, {
+      query: {token: store.getters.headers.Authorization}
+    }),
+    vuex: {
+      store,
+      actionPrefix: "SOCKET_",
+      mutationPrefix: "SOCKET_"
+    }
+  })
+);
+
 
 new Vue({
   el: '#app',
