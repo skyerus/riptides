@@ -1,7 +1,7 @@
 <template>
     <div class="overflow-auto" ref="chat">
         <template v-for="(item, index) in logs">
-            <v-subheader v-if="item" :key="index">{{ item }}</v-subheader>
+            <v-subheader v-if="item" :key="index" class="medium-text">{{ item }}</v-subheader>
             <v-divider class="mb-2 mt-2"/>
         </template>
     </div>

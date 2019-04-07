@@ -103,12 +103,12 @@
         border-right: hsla(0, 0%, 100%,.12) 1px solid;
     }
     .row-1 {
-        flex-grow: 2;
+        flex: 2 0 16%;
     }
     .row-2 {
-        flex-grow: 8;
+        flex: 8 0 68%;
     }
     .row-3 {
-        flex-grow: 2;
+        flex: 2 0 16%;
     }
 </style>
