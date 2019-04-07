@@ -76,6 +76,7 @@
 <script>
   import Login from './Login.vue';
   import Signup from './Signup.vue';
+  import handler from '../services/api/handler'
 
   export default {
     name: "Layout",
@@ -146,6 +147,9 @@
           this.$store.dispatch('resetUserState'),
           this.$store.dispatch('resetIndexState')
         ]).then(() => {
+          this.$socket.close();
+          this.$socket.io.opts.query = {token: this.$store.getters.headers.Authorization};
+          this.$socket.open();
           this.$router.push({name: 'home'});
         })
       },
@@ -154,8 +158,11 @@
       }
     },
     sockets: {
-      notification: function (data) {
-        this.$store.dispatch('showSnackbar', data)
+      notAuthenticated: function (data) {
+        console.log('notAuthenticated');
+        if (this.$store.getters.isLoggedIn) {
+          handler.handleSocketError(401);
+        }
       }
     }
   }

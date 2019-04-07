@@ -1,7 +1,7 @@
 import {store} from '../../store'
 
 export default {
-  handleResponse(error, axios, params) {
+  handleResponse(error, axios = null, params = null) {
     if (error.response.status === 401) {
       store.dispatch('toggleLoggedIn', false);
       store.dispatch('switchLoginPopup', true).then(() => {
@@ -14,7 +14,12 @@ export default {
       store.dispatch('updateToken', '').then(() => {
         this.checkLoggedIn(0).then((loggedIn) => {
           if (loggedIn === true) {
-            return axios(...params);
+            if (axios !== null) {
+              return axios(...params);
+            }
+          } else {
+            store.dispatch('resetUserState')
+            store.dispatch('resetIndexState')
           }
         })
       });
@@ -22,6 +27,14 @@ export default {
       store.dispatch('showSnackbar', 'Oops, something went wrong. Please try again later');
     }
     throw error;
+  },
+
+  handleSocketError(errorCode) {
+    return this.handleResponse({
+      response: {
+        status: errorCode
+      }
+    });
   },
 
   checkLoggedIn(i) {

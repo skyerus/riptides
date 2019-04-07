@@ -11,11 +11,16 @@
                     <v-divider class="mb-3"/>
                     <div>
                         <v-text-field
+                                v-model="message"
                                 outline
                                 label="Message"
                                 append-icon="send"
+                                @click:append="sendMessage"
                         ></v-text-field>
                     </div>
+                </div>
+                <div>
+                    {{ this.msg }}
                 </div>
             </div>
         </div>
@@ -28,8 +33,54 @@
 </template>
 
 <script>
+  import handler from '../services/api/handler'
+
   export default {
-    name: "Tide"
+    name: "Tide",
+    data() {
+      return {
+        message: '',
+        msg: '123'
+      }
+    },
+    computed: {
+      isLoggedIn: {
+        get() {
+          return this.$store.getters.isLoggedIn
+        }
+      }
+    },
+    methods: {
+      sendMessage() {
+        console.log('send');
+        this.$socket.emit('message', this.message)
+      },
+
+      joinTide() {
+        this.$socket.emit('join', 'testing')
+      }
+    },
+    sockets: {
+      message: function (data) {
+        this.msg = data.msg;
+      },
+      test: function (data) {
+        console.log(`User receives: ${data.msg}`);
+      },
+      error: function (data) {
+        handler.handleSocketError(data);
+      },
+    },
+    watch: {
+      isLoggedIn(val) {
+        if (val) {
+          this.joinTide();
+        }
+      }
+    },
+    mounted() {
+      this.joinTide();
+    }
   }
 </script>
 
