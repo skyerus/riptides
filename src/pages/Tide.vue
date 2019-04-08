@@ -68,7 +68,9 @@
     },
     sockets: {
       message: function (data) {
-        data.avatar = this.participants[data.username].avatar;
+        if (typeof data.username !== 'undefined') {
+          data.avatar = this.participants[data.username].avatar;
+        }
         this.logs.push(data);
         this.message = ''
       },
@@ -78,7 +80,6 @@
       },
 
       join: function (data) {
-        console.log(data.user.username);
         let username = data.user.username;
         if (username.length > 0) {
           this.logs.push({
@@ -103,9 +104,11 @@
       participants: function (data) {
         let username;
         data.forEach((participant) => {
-          username = participant.username;
-          delete participant.username;
-          this.$set(this.participants, username, participant)
+          if (participant !== null) {
+            username = participant.username;
+            delete participant.username;
+            this.$set(this.participants, username, participant)
+          }
         })
       },
 
