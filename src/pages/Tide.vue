@@ -55,18 +55,20 @@
     },
     methods: {
       sendMessage() {
+        console.log('Attempt to emit message');
         this.$socket.emit('message', this.message)
       },
 
       joinTide() {
         this.$socket.emit('join', {
-          room: 'testing',
+          tide: 'testing',
           user: this.$store.getters.myUser
         })
       },
     },
     sockets: {
       message: function (data) {
+        data.avatar = this.participants[data.username].avatar;
         this.logs.push(data);
         this.message = ''
       },
@@ -109,7 +111,7 @@
 
       reconnect: function () {
         this.$socket.emit('join', {
-          room: 'testing',
+          tide: 'testing',
           user: this.$store.getters.myUser
         })
       }

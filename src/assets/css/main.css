@@ -20,6 +20,9 @@ html, body {
 .dark-text-2 {
     color: rgb(149, 151, 152);
 }
+.dark-text-3 {
+    color: rgba(6, 6, 6, 0.87)
+}
 .small-text {
     font-size: 13px;
 }
