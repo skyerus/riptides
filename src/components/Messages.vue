@@ -51,7 +51,4 @@
 </script>
 
 <style scoped>
-    .overflow-auto {
-        overflow: auto;
-    }
 </style>

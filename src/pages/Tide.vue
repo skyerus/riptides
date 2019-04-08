@@ -22,7 +22,7 @@
                 <Messages ref="messages" :logs="this.logs"/>
             </div>
         </div>
-        <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0">
+        <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
             <ParticipantSidebar :participants="this.participants" />
         </div>
     </div>
@@ -76,6 +76,7 @@
       },
 
       join: function (data) {
+        console.log(data.user.username);
         let username = data.user.username;
         if (username.length > 0) {
           this.logs.push({
@@ -103,6 +104,13 @@
           username = participant.username;
           delete participant.username;
           this.$set(this.participants, username, participant)
+        })
+      },
+
+      reconnect: function () {
+        this.$socket.emit('join', {
+          room: 'testing',
+          user: this.$store.getters.myUser
         })
       }
     },

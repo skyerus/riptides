@@ -1,6 +1,6 @@
 <template>
-    <v-container>
-        <v-layout v-for="(participant, index) in participants" class="pb-3">
+    <div>
+        <div v-for="(participant, index) in participants" class="pb-3">
             <v-list-tile
                     avatar
             >
@@ -13,8 +13,8 @@
                     <v-list-tile-sub-title v-text="participant.bio"></v-list-tile-sub-title>
                 </v-list-tile-content>
             </v-list-tile>
-        </v-layout>
-    </v-container>
+        </div>
+    </div>
 </template>
 
 <script>
