@@ -23,9 +23,7 @@
             </div>
         </div>
         <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0">
-            <div class="pa-2">
-                Test
-            </div>
+            <ParticipantSidebar :participants="this.participants" />
         </div>
     </div>
 </template>
@@ -33,11 +31,13 @@
 <script>
   import handler from '../services/api/handler'
   import Messages from '../components/Messages.vue'
+  import ParticipantSidebar from '../components/ParticipantSidebar.vue'
 
   export default {
     name: "Tide",
     components: {
-      Messages
+      Messages,
+      ParticipantSidebar
     },
     data() {
       return {
@@ -83,7 +83,7 @@
             message: `${username} joined`
           })
           delete data.user.username;
-          this.participants[username] = data.user;
+          this.$set(this.participants, username, data.user);
         }
       },
 
@@ -93,8 +93,17 @@
             type: 'italic',
             message: `${data} left`
           })
-          delete this.participants[data];
+          this.$delete(this.participants, data);
         }
+      },
+
+      participants: function (data) {
+        let username;
+        data.forEach((participant) => {
+          username = participant.username;
+          delete participant.username;
+          this.$set(this.participants, username, participant)
+        })
       }
     },
     watch: {
