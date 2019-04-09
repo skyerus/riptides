@@ -1,12 +1,10 @@
 <template>
-    <div class="height-95 flex-container">
+    <div class="max-height flex-container">
         <div class="d-inline-block vertical-align-top l-sidebar row-1 pl-2 dark-bg-0">
-            <div class="pa-2">
-                Test
-            </div>
+            <QueueSidebar :queue="this.queue"/>
         </div>
         <div class="d-inline-block row-2 pl-2 pr-2">
-            <div class="flex-container flex-col-reverse height-95">
+            <div class="flex-container flex-col-reverse max-height">
                 <div>
                     <div>
                         <v-text-field
@@ -22,10 +20,8 @@
                 <Messages ref="messages" :logs="this.logs"/>
             </div>
         </div>
-        <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0">
-            <div class="pa-2">
-                Test
-            </div>
+        <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
+            <ParticipantSidebar :participants="this.participants" />
         </div>
     </div>
 </template>
@@ -33,17 +29,22 @@
 <script>
   import handler from '../services/api/handler'
   import Messages from '../components/Messages.vue'
+  import ParticipantSidebar from '../components/ParticipantSidebar.vue'
+  import QueueSidebar from '../components/QueueSidebar.vue'
 
   export default {
     name: "Tide",
     components: {
-      Messages
+      Messages,
+      ParticipantSidebar,
+      QueueSidebar,
     },
     data() {
       return {
         message: '',
         logs: [],
-        participants: {}
+        participants: {},
+        queue: [],
       }
     },
     computed: {
@@ -55,18 +56,33 @@
     },
     methods: {
       sendMessage() {
+        console.log('Attempt to emit message');
         this.$socket.emit('message', this.message)
       },
 
       joinTide() {
         this.$socket.emit('join', {
-          room: 'testing',
+          tide: 'testing',
           user: this.$store.getters.myUser
         })
       },
+
+      // Hack to deal with toolbar inconsistent height
+      calculateHeight() {
+        let toolbarHeight = document.getElementById('toolbar').getBoundingClientRect().bottom
+        let availableHeight = window.innerHeight - toolbarHeight
+        let maxHeight = document.getElementsByClassName('max-height')
+
+        for(let i=0; i < maxHeight.length; i++) {
+          maxHeight[i].style.height = `${availableHeight}px`
+        }
+      }
     },
     sockets: {
       message: function (data) {
+        if (typeof data.username !== 'undefined') {
+          data.avatar = this.participants[data.username].avatar;
+        }
         this.logs.push(data);
         this.message = ''
       },
@@ -83,7 +99,7 @@
             message: `${username} joined`
           })
           delete data.user.username;
-          this.participants[username] = data.user;
+          this.$set(this.participants, username, data.user);
         }
       },
 
@@ -93,8 +109,30 @@
             type: 'italic',
             message: `${data} left`
           })
-          delete this.participants[data];
+          this.$delete(this.participants, data);
         }
+      },
+
+      participants: function (data) {
+        let username;
+        data.forEach((participant) => {
+          if (participant !== null) {
+            username = participant.username
+            delete participant.username;
+            this.$set(this.participants, username, participant)
+          }
+        })
+      },
+
+      queue: function (data) {
+        this.queue = data
+      },
+
+      reconnect: function () {
+        this.$socket.emit('join', {
+          tide: 'testing',
+          user: this.$store.getters.myUser
+        })
       }
     },
     watch: {
@@ -105,18 +143,22 @@
       },
     },
     mounted() {
-      this.joinTide();
+      this.calculateHeight()
+      document.getElementById('nav-drawer').style.backgroundColor = '#303030'
+      this.joinTide()
+      this.$nextTick(() => {
+        window.addEventListener('resize', this.calculateHeight)
+      })
     },
+
+    beforeDestroy() {
+      document.getElementById('nav-drawer').style.backgroundColor = '#424242'
+      window.removeEventListener('resize', this.calculateHeight)
+    }
   }
 </script>
 
 <style scoped>
-    .flex-container {
-        display: flex;
-    }
-    .flex-col-reverse {
-        flex-direction: column-reverse;
-    }
     .r-sidebar {
         border-left: hsla(0, 0%, 100%,.12) 1px solid;
     }

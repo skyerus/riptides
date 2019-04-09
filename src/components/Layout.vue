@@ -2,10 +2,11 @@
     <div>
         <v-navigation-drawer
             v-model="drawer"
-            dark
             app
             fixed
             clipped
+            class="max-height"
+            id="nav-drawer"
         >
             <router-link v-for="page in pages" :to="{ path: page.url }">
                 <div class="grid-container-4 pb-3 pt-3">
