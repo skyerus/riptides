@@ -93,7 +93,7 @@ html, body {
     height: 20vh;
 }
 .dark-bg-1 {
-    background-color: #303030;
+    background-color: #303030 !important;
 }
 .dark-bg-2 {
     background-color: #242424;
@@ -133,4 +133,10 @@ html, body {
 }
 .overflow-auto {
     overflow: auto;
+}
+.flex-container {
+    display: flex;
+}
+.flex-col-reverse {
+    flex-direction: column-reverse;
 }
