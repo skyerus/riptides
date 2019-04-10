@@ -1,36 +1,44 @@
 <template>
-    <v-dialog v-model="open" width="700">
-        <v-card class="min-height-60">
+    <v-dialog v-model="open" width="700" persistent>
+        <v-card>
             <v-card-title>
                 <span class="headline">Tide</span>
             </v-card-title>
             <v-card-text>
                 <v-layout wrap>
-                    <v-flex xs12 class="mt-4">
+                    <v-flex xs12 class="pt-3 pb-5">
+                        <v-text-field
+                                label="Name"
+                                v-model="name"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 class="pt-4 pb-4">
                         <multiselect v-model="values" :options="options" :multiple="true" :close-on-select="false" :custom-label="setGenreLabel"
                                      placeholder="Select at least one genre" track-by="name"/>
                     </v-flex>
-                    <v-flex xs12 class="mt-5 pt-2">
+                    <v-flex xs12 class="pt-4 pb-4">
                         <v-text-field
-                                label="Name"
+                                label="About (optional)"
+                                v-model="about"
                         ></v-text-field>
                     </v-flex>
-<!--                    <v-flex xs12 class="pb-1 mt-3">-->
-<!--                        <label class="typo__label">Genre</label>-->
-<!--                    </v-flex>-->
-                    <v-flex xs12 class="mt-5 pt-4">
+                    <v-flex xs12 class="pt-5 pb-4">
                         <multiselect v-model="tagsValues" :options="tagsOptions" :multiple="true" :taggable="true" :close-on-select="false" @tag="addTag"
-                             placeholder="Add some tags (optional)" track-by="name" :custom-label="setTagLabel" :showNoResults="false"
+                             placeholder="Add some optional tags (sub-genres etc.)" track-by="name" :custom-label="setTagLabel" :showNoResults="false"
                         >
                             <template v-slot:noOptions>
-                                 <div class="dark-bg-1" style="display:none">
-
+                                 <div style="display:none">
                                  </div>
                             </template>
                         </multiselect>
                     </v-flex>
                 </v-layout>
             </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click="open = false">Close</v-btn>
+                <v-btn color="blue darken-1" flat @click="create(values, tagsValues, name, about)">Create</v-btn>
+            </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
@@ -53,7 +61,9 @@
         values: [],
         options: [],
         tagsOptions: [],
-        tagsValues: []
+        tagsValues: [],
+        name: '',
+        about: ''
       }
     },
     computed: {
@@ -89,6 +99,18 @@
 
       setTagLabel({name}) {
         return name
+      },
+
+      create(genreValues, tagValues, name, about) {
+        tidesApi.createTide(genreValues, tagValues, name, about).then((response) => {
+          this.values = []
+          this.tagsValues = []
+          this.name = ''
+          this.about = ''
+          this.open = false
+        }).catch((err) => {
+          handler.handleResponse(err, this.create, [genreValues, tagValues, name, about])
+        })
       },
     },
     mounted() {

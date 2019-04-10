@@ -1,7 +1,17 @@
 <template>
     <div class="pa-4">
-        <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
-        <CreateTide :popupOpen="popupOpen" @popupClose="popupOpen = false"/>
+        <CreateTide v-if="popupOpen" :popupOpen="popupOpen" @popupClose="popupOpen = false"/>
+        <v-layout>
+            <v-flex xs1 md3>
+
+            </v-flex>
+            <v-flex xs10 md6>
+                <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
+            </v-flex>
+            <v-flex xs1 md3>
+
+            </v-flex>
+        </v-layout>
     </div>
 </template>
 
@@ -15,7 +25,7 @@
     },
     data() {
       return {
-        popupOpen: true
+        popupOpen: false
       }
     },
     methods: {

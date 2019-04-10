@@ -1,13 +1,13 @@
 .multiselect__select, .multiselect__tags {
     color: #303030 !important;
 }
-.multiselect__input, .multiselect__input::placeholder, .multiselect__select, .multiselect__tags, .multiselect_option, .multiselect__element, .multiselect__option::after {
+.multiselect__input, .multiselect__input::placeholder, .multiselect__select, .multiselect__tags, .multiselect__option, .multiselect__element, .multiselect__option::after {
     background-color: #303030 !important;
 }
 .multiselect__input, .multiselect__input::placeholder, .multiselect__option--highlight, .multiselect__element {
     color: #adadad !important;
 }
-.multiselect__tag, .multiselect__element:hover, .multiselect__option--highlight, .multiselect__option--highlight::after, .multiselect__option {
+.multiselect__tag, .multiselect__element:hover, .multiselect__option--highlight, .multiselect__option--highlight::after {
     background-color: #424242 !important;
 }
 .multiselect__tag-icon, .multiselect__tag-icon::after, .multiselect__option--selected {
