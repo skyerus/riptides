@@ -6,7 +6,7 @@
         <div class="row-2 pl-2 pr-2">
             <div class="flex-container flex-col-reverse max-height">
                 <div>
-                    <div>
+                    <div class="pb-1">
                         <v-text-field
                                 v-model="message"
                                 outline
