@@ -115,9 +115,9 @@
         get() {
           return [
             {
-              title: 'Your Library',
+              title: 'Tides',
               icon: 'queue_music',
-              url: '/' + this.username + '/library'
+              url: '/tides'
             },
             {
               title: 'Discover',

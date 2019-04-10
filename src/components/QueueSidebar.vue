@@ -1,8 +1,19 @@
 <template>
-    <div class="flex-container flex-col-reverse max-height">
-        <div v-for="(song, index) in queue">
-            <h3>{{ song.name }}</h3>
-            <div>{{ song.artist }}</div>
+    <div class="flex-container flex-col-reverse max-height pb-3">
+        <div v-for="(song, index) in queue" >
+            <v-divider class="pb-2 mr-2"/>
+            <h3 v-if="index === 0" class="pb-2 dark-text-3">
+                Now playing
+            </h3>
+            <div class="pb-2 flex-container align-center justify-start">
+                <div class="vertical-align-top col-1">
+                    <img :src="song.image.url" :height="song.image.height" :width="song.image.width">
+                </div>
+                <div class="col-2 ml-3">
+                    <h3>{{ song.name }}</h3>
+                    <div>{{ song.artist }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -17,5 +28,10 @@
 </script>
 
 <style scoped>
-
+    .col-1 {
+        flex: 0 auto;
+    }
+    .col-2 {
+        flex: 1 1 auto;
+    }
 </style>

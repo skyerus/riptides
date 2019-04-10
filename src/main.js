@@ -8,6 +8,7 @@ import App from './App.vue'
 import 'vuetify/dist/vuetify.min.css'
 import axios from 'axios'
 import './assets/css/main.css'
+import './assets/css/multiselect.css'
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 
