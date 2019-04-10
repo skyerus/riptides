@@ -1,45 +1,29 @@
 <template>
-    <multiselect v-model="value" :options="options" :multiple="true" :close-on-select="false" :custom-label="setGenreLabel"/>
+    <div class="pa-4">
+        <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
+        <CreateTide :popupOpen="popupOpen" @popupClose="popupOpen = false"/>
+    </div>
 </template>
 
 <script>
-  import multiselect from 'vue-multiselect'
-  import handler from '../services/api/handler'
-  import tidesApi from '../services/api/tides'
+  import CreateTide from '../components/CreateTide.vue'
 
   export default {
     name: "Tides",
     components: {
-      multiselect
+      CreateTide
     },
     data() {
       return {
-        value: [],
-        options: [
-          'Hip-Hop',
-          'Jazz'
-        ]
+        popupOpen: true
       }
     },
     methods: {
-      hydrateGenres() {
-        tidesApi.getGenres().then((response) => {
-          this.options = response.data
-        }).catch((err) => {
-          handler.handleResponse(err, this.hydrateGenres);
-        })
-      },
-
-      setGenreLabel({id, name}) {
-        return name
-      }
     },
     mounted() {
-      this.hydrateGenres()
     }
   }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 </style>
