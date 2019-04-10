@@ -1,9 +1,9 @@
 <template>
     <div class="max-height flex-container">
-        <div class="d-inline-block vertical-align-top l-sidebar row-1 pl-2 dark-bg-0">
+        <div class="vertical-align-top l-sidebar row-1 pl-2 dark-bg-0">
             <QueueSidebar :queue="this.queue"/>
         </div>
-        <div class="d-inline-block row-2 pl-2 pr-2">
+        <div class="row-2 pl-2 pr-2">
             <div class="flex-container flex-col-reverse max-height">
                 <div>
                     <div>
@@ -20,7 +20,7 @@
                 <Messages ref="messages" :logs="this.logs"/>
             </div>
         </div>
-        <div class="d-inline-block vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
+        <div class="vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
             <ParticipantSidebar :participants="this.participants" />
         </div>
     </div>
