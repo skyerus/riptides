@@ -23,5 +23,13 @@ export default {
         about: about
       }
     })
+  },
+
+  getTides() {
+    return axios({
+      method: 'get',
+      url: 'api/tides',
+      headers: store.getters.headers
+    })
   }
 }

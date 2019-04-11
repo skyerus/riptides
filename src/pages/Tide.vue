@@ -8,12 +8,12 @@
                 <div>
                     <div class="pb-1">
                         <v-text-field
-                                v-model="message"
-                                outline
-                                label="Message"
-                                append-icon="send"
-                                @click:append="sendMessage"
-                                @keyup.enter="sendMessage"
+                            v-model="message"
+                            outline
+                            label="Message"
+                            append-icon="send"
+                            @click:append="sendMessage"
+                            @keyup.enter="sendMessage"
                         ></v-text-field>
                     </div>
                 </div>
