@@ -62,7 +62,7 @@
 
       joinTide() {
         this.$socket.emit('join', {
-          tide: 'testing',
+          tide: this.$route.params.id,
           user: this.$store.getters.myUser
         })
       },
@@ -130,7 +130,7 @@
 
       reconnect: function () {
         this.$socket.emit('join', {
-          tide: 'testing',
+          tide: this.$route.params.id,
           user: this.$store.getters.myUser
         })
       }
