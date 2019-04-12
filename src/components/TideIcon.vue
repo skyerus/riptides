@@ -1,27 +1,30 @@
 <template>
     <v-card class="dark-bg overflow-y-hidden">
-<!--        <v-toolbar-->
-<!--            dense-->
-<!--            height="37px"-->
-<!--        >-->
-<!--            {{ this.tide.name }}-->
-<!--        </v-toolbar>-->
         <v-card-title>
             <span class="headline">{{ this.tide.name }}</span>
-            <v-spacer/><span v-for="genre in tide.genres" class="tag">{{ genre.genre.name }}</span>
+            <v-spacer/>
+            <v-btn small color="primary" round :to="`/tide/${tide.id}`">Join</v-btn>
         </v-card-title>
         <v-card-text v-if="tide.about !== ''">
-            {{this.tide.about}}
+            <span>{{this.tide.about}}</span>
         </v-card-text>
-        <v-card-title v-if="this.tide.participants.length > 0">
-            <span class="headline">Participants</span>
+        <v-card-title v-if="tide.tags.length > 0">
+            <span class="headline nice-grey">Tags</span><v-spacer/><span v-for="tag in tide.tags" class="tag">{{ tag.name }}</span>
+        </v-card-title>
+        <v-card-title>
+            <span class="headline nice-grey">Participants</span>
+        </v-card-title>
+        <v-card-title v-if="this.tide.participants.length === 0">
+            <span class="ma-auto nice-grey">Empty</span>
         </v-card-title>
         <div class="overflow-auto max-height-200 scrollbar">
             <div v-for="participant in this.tide.participants">
-                <UserTile :username="participant.user.username" :avatar="participant.user.avatar"/>
+                <UserTile :username="participant.username" :avatar="participant.avatar"/>
             </div>
         </div>
-        <UserToolbar :user="this.tide.user"/>
+        <UserToolbar :user="this.tide.user">
+            <v-spacer/><span v-for="genre in tide.genres" class="tag">{{ genre.name }}</span>
+        </UserToolbar>
     </v-card>
 </template>
 
