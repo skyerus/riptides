@@ -154,6 +154,7 @@
     beforeDestroy() {
       document.getElementById('nav-drawer').style.backgroundColor = '#424242'
       window.removeEventListener('resize', this.calculateHeight)
+      this.$socket.emit('leave')
     }
   }
 </script>
