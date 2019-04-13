@@ -1,22 +1,35 @@
 <template>
     <v-container justify-center>
         <v-flex xs12 sm6 offset-sm3 class="dark-text-1">
-            <h2 class="mb-4">Account settings</h2>
-            <h5>ACCOUNT PREFERENCES</h5>
-            <v-divider class="mb-3"/>
-            <h3 class="mb-3">Change email</h3>
-            <h3 class="mb-3">Change username</h3>
-            <h3 class="mb-3">Change password</h3>
-            <h5>CONNECTED ACCOUNTS</h5>
-            <v-divider class="mb-3"/>
-            <v-layout row>
-                <v-flex xs6 align-self-center>
-                    Connect your Spotify account
-                </v-flex>
-                <v-flex xs6>
-                    <v-btn color="success" :href="spotifyAuthorizeUrl">Spotify</v-btn>
-                </v-flex>
-            </v-layout>
+            <v-card class="dark-bg">
+                <v-card-title>
+                    <span class="headline">Account Settings</span>
+                </v-card-title>
+                <v-card-text>
+                    <span>DETAILS</span>
+                    <v-divider/>
+                </v-card-text>
+                <v-card-text>
+                    <span>Change email</span>
+                </v-card-text>
+                <v-card-text>
+                    <span>Change username</span>
+                </v-card-text>
+                <v-card-text>
+                    <span>Change password</span>
+                </v-card-text>
+                <v-card-text>
+                    <span>Upload avatar: </span>
+                    <input type="file" accept="image/*" id="file-input">
+                </v-card-text>
+                <v-card-text>
+                    <span>CONNECT ACCOUNTS</span>
+                    <v-divider/>
+                </v-card-text>
+                <v-card-text>
+                    <v-btn round color="success" :href="spotifyAuthorizeUrl">Spotify</v-btn>
+                </v-card-text>
+            </v-card>
         </v-flex>
     </v-container>
 </template>
