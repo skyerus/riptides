@@ -6,7 +6,7 @@ COPY package-lock.json package-lock.json
 COPY package.json package.json
 RUN npm install
 COPY . .
-RUN npm run-script build
+RUN ./node_modules/.bin/webpack --config webpack.prod.js
 
 
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
