@@ -16,7 +16,7 @@ const routes = [
     component: Tides
   },
   {
-    path: '/tide',
+    path: '/tide/:id',
     name: 'tide',
     component: Tide
   },

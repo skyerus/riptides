@@ -8,12 +8,12 @@
                 <div>
                     <div class="pb-1">
                         <v-text-field
-                                v-model="message"
-                                outline
-                                label="Message"
-                                append-icon="send"
-                                @click:append="sendMessage"
-                                @keyup.enter="sendMessage"
+                            v-model="message"
+                            outline
+                            label="Message"
+                            append-icon="send"
+                            @click:append="sendMessage"
+                            @keyup.enter="sendMessage"
                         ></v-text-field>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
 
       joinTide() {
         this.$socket.emit('join', {
-          tide: 'testing',
+          tide: this.$route.params.id,
           user: this.$store.getters.myUser
         })
       },
@@ -130,7 +130,7 @@
 
       reconnect: function () {
         this.$socket.emit('join', {
-          tide: 'testing',
+          tide: this.$route.params.id,
           user: this.$store.getters.myUser
         })
       }
@@ -154,6 +154,7 @@
     beforeDestroy() {
       document.getElementById('nav-drawer').style.backgroundColor = '#424242'
       window.removeEventListener('resize', this.calculateHeight)
+      this.$socket.emit('leave')
     }
   }
 </script>
