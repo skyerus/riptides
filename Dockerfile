@@ -10,6 +10,6 @@ COPY . .
 
 RUN mkdir dist
 
-RUN npm run-script build
+RUN npm run build
 
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
