@@ -122,7 +122,4 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
-    .min-height-60 {
-        min-height: 50vh;
-    }
 </style>
