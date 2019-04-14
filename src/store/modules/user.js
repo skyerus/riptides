@@ -1,7 +1,7 @@
 const getDefaultState = () => {
   return {
     usernameInput: '',
-    email: '',
+    emailInput: '',
     following: null,
     followers: null,
     numberOfFollowers: null,
@@ -19,7 +19,7 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const getters = {
-  email: state => state.email,
+  emailInput: state => state.emailInput,
   usernameInput: state => state.usernameInput,
   username: state => state.myUser.username,
   following: state => state.following,
@@ -35,8 +35,8 @@ const actions = {
   updateUsernameInput({commit}, username) {
     commit('updateUsernameInput', username);
   },
-  updateEmail({commit}, email) {
-    commit('updateEmail', email);
+  updateEmailInput({commit}, email) {
+    commit('updateEmailInput', email);
   },
   resetUserState({commit}) {
     commit('resetState');
@@ -77,8 +77,8 @@ const mutations = {
   updateUsernameInput(state, username) {
     state.usernameInput = username;
   },
-  updateEmail(state, email) {
-    state.email = email;
+  updateEmailInput(state, email) {
+    state.emailInput = email;
   },
   resetState (state) {
     Object.assign(state, getDefaultState())

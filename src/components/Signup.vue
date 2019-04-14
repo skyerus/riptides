@@ -28,7 +28,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="open = false">Close</v-btn>
-                <v-btn color="blue darken-1" flat @click="signup()">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="signup">Save</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -45,18 +45,18 @@
     computed: {
       username: {
         get() {
-          return this.$store.getters.username;
+          return this.$store.getters.usernameInput;
         },
         set(value) {
-          this.$store.dispatch('updateUsername', value);
+          this.$store.dispatch('updateUsernameInput', value);
         }
       },
       email: {
         get() {
-          return this.$store.getters.email;
+          return this.$store.getters.emailInput;
         },
         set(value) {
-          this.$store.dispatch('updateEmail', value);
+          this.$store.dispatch('updateEmailInput', value);
         }
       }
     },
@@ -82,12 +82,16 @@
       signup() {
         UserApi.signup(this.password).then((response) => {
           UserApi.login(this.password).then((response) => {
-            this.$store.dispatch('toggleLoggedIn', true);
-            this.$store.dispatch('updateToken', response.data.token);
-            this.$store.dispatch('showSnackbar', 'Welcome ' + this.$store.getters.username);
-            this.open = false;
+            this.$store.dispatch('updateToken', response.data.token).then(() => {
+              UserApi.getMyConfig().then(() => {
+                this.$store.dispatch('toggleLoggedIn', true).then(() => {
+                  this.open = false;
+                  this.$router.push({path: '/tides'})
+                });
+              });
+            });
+            this.$store.dispatch('showSnackbar', 'Welcome ' + this.$store.getters.usernameInput);
           }).catch(() => {
-
           });
           this.password = '';
         });

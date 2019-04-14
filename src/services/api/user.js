@@ -34,7 +34,7 @@ export default {
       headers: store.getters.headers,
       data: {
         username: store.getters.usernameInput,
-        email: store.getters.email,
+        email: store.getters.emailInput,
         password: password
       }
     }).then((response) => {
