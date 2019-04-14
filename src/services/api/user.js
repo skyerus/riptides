@@ -30,7 +30,7 @@ export default {
   signup(password) {
     return axios({
       method: 'post',
-      url: 'user',
+      url: 'api/createuser',
       headers: store.getters.headers,
       data: {
         username: store.getters.usernameInput,
