@@ -13,8 +13,14 @@
                         ></v-text-field>
                     </v-flex>
                     <v-flex xs12 class="pt-4 pb-4">
-                        <multiselect v-model="values" :options="options" :multiple="true" :close-on-select="false" :custom-label="setGenreLabel"
-                                     placeholder="Select at least one genre" track-by="name"/>
+                        <multiselect v-model="values"
+                                     :options="options"
+                                     :multiple="true"
+                                     :close-on-select="false"
+                                     :custom-label="setGenreLabel"
+                                     placeholder="Select at least one genre"
+                                     track-by="name"
+                        />
                     </v-flex>
                     <v-flex xs12 class="pt-4 pb-4">
                         <v-text-field

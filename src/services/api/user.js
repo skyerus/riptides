@@ -30,7 +30,7 @@ export default {
   signup(password) {
     return axios({
       method: 'post',
-      url: 'api/createuser',
+      url: 'api/user',
       headers: store.getters.headers,
       data: {
         username: store.getters.usernameInput,
@@ -56,7 +56,7 @@ export default {
   getFollowing(username) {
     return axios({
       method: 'get',
-      url: 'api/user/' + username + '/following',
+      url: 'api/auth/user/' + username + '/following',
       headers: store.getters.headers,
     }).then((response) => {
       store.dispatch('setFollowing', response.data.following);
@@ -69,7 +69,7 @@ export default {
   getFollowers(username) {
     return axios({
       method: 'get',
-      url: 'api/user/' + username + '/followers',
+      url: 'api/auth/user/' + username + '/followers',
       headers: store.getters.headers,
     }).then((response) => {
       store.dispatch('setFollowers', response.data.followers);
@@ -82,7 +82,7 @@ export default {
   getUser(username) {
     return axios({
       method: 'get',
-      url: 'api/user/' + username,
+      url: 'api/auth/user/' + username,
       headers: store.getters.headers,
     }).then((response) => {
       store.dispatch('setUser', response.data.user);
@@ -95,7 +95,7 @@ export default {
   followUser(username) {
     return axios({
       method: 'put',
-      url: 'api/user/follow/' + username,
+      url: 'api/auth/user/follow/' + username,
       headers: store.getters.headers,
     })
   },
@@ -103,7 +103,7 @@ export default {
   unfollowUser(username) {
     return axios({
       method: 'delete',
-      url: 'api/user/unfollow/' + username,
+      url: 'api/auth/user/unfollow/' + username,
       headers: store.getters.headers,
     })
   },
@@ -111,7 +111,7 @@ export default {
   getMyConfig() {
     return axios({
       method: 'get',
-      url: 'api/me/config',
+      url: 'api/auth/me/config',
       headers: store.getters.headers,
     }).then((response) => {
       store.dispatch('setMyUser', response.data.user);

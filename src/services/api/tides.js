@@ -28,7 +28,7 @@ export default {
   getTides() {
     return axios({
       method: 'get',
-      url: 'api/tides',
+      url: 'api/auth/tides',
       headers: store.getters.headers
     })
   }
