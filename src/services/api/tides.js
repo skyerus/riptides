@@ -1,12 +1,11 @@
 import axios from 'axios'
 import { store } from '../../store'
-import handler from './handler';
 
 export default {
   getGenres() {
     return axios({
       method: 'get',
-      url: '/api/tides/genres',
+      url: '/api/auth/tides/genres',
       headers: store.getters.headers
     })
   },
@@ -14,7 +13,7 @@ export default {
   createTide(genreValues, tagValues, name, about) {
     return axios({
       method: 'post',
-      url: '/api/tides',
+      url: '/api/auth/tides',
       headers: store.getters.headers,
       data: {
         name: name,
