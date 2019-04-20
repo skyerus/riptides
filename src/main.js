@@ -27,7 +27,8 @@ let socketUrl = process.env.CHAT_SOCKET_URL;
 Vue.use(new VueSocketIO({
     debug: true,
     connection: SocketIO(socketUrl, {
-      query: {token: store.getters.headers.Authorization}
+      query: {token: store.getters.headers.Authorization},
+      path: '/socket/socket.io'
     }),
     vuex: {
       store,
