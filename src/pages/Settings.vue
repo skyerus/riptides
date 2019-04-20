@@ -41,7 +41,7 @@
     name: "Settings",
     data() {
       return {
-        spotifyAuthorizeUrl: process.env.SPOTIFY_AUTHORIZE_URL,
+        spotifyAuthorizeUrl: process.env.SPOTIFY_AUTHORIZE_URL || '/api/spotify/authorize',
         params: new URL(document.location).searchParams
       }
     },
