@@ -17,7 +17,9 @@
         </v-navigation-drawer>
         <v-toolbar app fixed clipped-left dark id="toolbar">
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-            <span class="title ml-3 mr-5">riptides</span>
+            <router-link :to="{ path: '/tides' }">
+                <span class="title ml-3 mr-5 hover-cursor" >riptides</span>
+            </router-link>
             <v-text-field
                 solo-inverted
                 flat
