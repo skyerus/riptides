@@ -106,11 +106,6 @@
           this.$store.dispatch('hideSnackbar');
         }
       },
-      username: {
-        get() {
-          return this.$store.getters.username;
-        }
-      },
       pages: {
         get() {
           return [
