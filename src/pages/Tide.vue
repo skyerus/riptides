@@ -80,11 +80,22 @@
     },
     sockets: {
       message: function (data) {
+        data.message = [data.message]
         if (typeof data.username !== 'undefined') {
           data.avatar = this.participants[data.username].avatar;
+          if (data.username === this.$store.getters.username) {
+            this.message = ''
+          }
+
+          let logsLength = this.logs.length
+          if (typeof this.logs[logsLength - 1].username !== 'undefined'
+            && this.logs[logsLength - 1].username === data.username
+            && this.logs[logsLength - 1].type === data.type) {
+            this.logs[logsLength - 1].message.push(data.message[0])
+            return
+          }
         }
         this.logs.push(data);
-        this.message = ''
       },
 
       error: function (data) {
@@ -96,7 +107,7 @@
         if (username.length > 0) {
           this.logs.push({
             type: 'italic',
-            message: `${username} joined`
+            message: [`${username} joined`]
           })
           delete data.user.username;
           this.$set(this.participants, username, data.user);
@@ -107,7 +118,7 @@
         if (data.length > 0) {
           this.logs.push({
             type: 'italic',
-            message: `${data} left`
+            message: [`${data} left`]
           })
           this.$delete(this.participants, data);
         }

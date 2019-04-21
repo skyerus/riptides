@@ -7,10 +7,14 @@
                 </v-list-tile-avatar>
                 <div class="center-block">
                     <h3 v-if="typeof item.username !== 'undefined'" class="font-weight-bold dark-text-3">{{ item.username }}</h3>
-                    <div v-if="item.type === 'standard'" :key="index" class="medium-text">{{ item.message }}</div>
-                    <div v-if="item.type === 'italic'">
-                        <div v-if="typeof item.avatar !== 'undefined'" :key="index" class="font-italic small-text">{{ item.message }}</div>
-                        <div v-else :key="index" class="font-italic pl-3 small-text">{{ item.message }}</div>
+                    <div v-for="message in item.message">
+                        <div v-if="item.type === 'standard'" :key="index" class="medium-text">{{ message }}</div>
+                        <div v-if="item.type === 'italic'">
+                            <div :key="index" :class="{ 'pl-3': typeof item.avatar === 'undefined'}" class="font-italic small-text"
+                            >
+                                {{ message }}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <v-divider class="mb-2 mt-2"/>
