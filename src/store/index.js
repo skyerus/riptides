@@ -6,9 +6,9 @@ import user from './modules/user'
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production';
+let debug = process.env.NODE_ENV !== 'prod';
 
-if (process.env.APP_ENV === 'local') {
+if (process.env.NODE_ENV !== 'prod') {
   Vue.config.devtools = true
 }
 

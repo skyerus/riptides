@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-auto" ref="chat">
+    <div class="overflow-auto scrollbar-light" ref="chat">
         <template v-for="(item, index) in logs">
             <div>
                 <v-list-tile-avatar v-if="typeof item.avatar !== 'undefined'" class="ml-2 center-block" size="40px">
@@ -28,11 +28,12 @@
     name: "Messages",
     props: [
       'logs',
+      'logsUpdate'
     ],
     data() {
       return {
         scrolled: false,
-        maxScrollTop: 0
+        maxScrollTop: 0,
       }
     },
     methods: {
@@ -52,7 +53,7 @@
       }
     },
     watch: {
-      logs() {
+      logsUpdate() {
         setTimeout(() => this.updateScroll(this.scrolled), 0);
       }
     },

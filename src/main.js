@@ -23,9 +23,10 @@ Vue.config.productionTip = false
 axios.defaults.baseURL = process.env.API_URL;
 
 let socketUrl = process.env.CHAT_SOCKET_URL;
+let debug = process.env.NODE_ENV !== 'prod';
 
 Vue.use(new VueSocketIO({
-    debug: true,
+    debug: debug,
     connection: SocketIO(socketUrl, {
       query: {token: store.getters.headers.Authorization},
       path: '/socket/socket.io'

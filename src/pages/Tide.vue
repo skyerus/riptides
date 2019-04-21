@@ -17,7 +17,7 @@
                         ></v-text-field>
                     </div>
                 </div>
-                <Messages ref="messages" :logs="this.logs"/>
+                <Messages ref="messages" :logsUpdate="logsUpdate" :logs="logs"/>
             </div>
         </div>
         <div class="vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
@@ -45,6 +45,7 @@
         logs: [],
         participants: {},
         queue: [],
+        logsUpdate: false,
       }
     },
     computed: {
@@ -93,9 +94,11 @@
             && this.logs[logsLength - 1].username === data.username
             && this.logs[logsLength - 1].type === data.type) {
             this.logs[logsLength - 1].message.push(data.message[0])
+            this.logsUpdate = !this.logsUpdate
             return
           }
         }
+        this.logsUpdate = !this.logsUpdate
         this.logs.push(data);
       },
 
