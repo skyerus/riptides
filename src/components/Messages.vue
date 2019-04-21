@@ -67,8 +67,4 @@
 </script>
 
 <style scoped>
-    .center-block {
-        display: inline-block;
-        vertical-align: middle;
-    }
 </style>

@@ -184,3 +184,7 @@ html, body {
 .nice-grey {
     color: #adadad;
 }
+.center-block {
+    display: inline-block;
+    vertical-align: middle;
+}

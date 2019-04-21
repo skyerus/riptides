@@ -14,17 +14,32 @@
                     <div>{{ song.artist }}</div>
                 </div>
             </div>
+            <UserTile
+                    :username="song.user.username"
+                    :avatar="song.user.avatar"
+                    gap="3px"
+                    imageSize="30px"
+                    usernameSize="14px"
+                    username-color="rgba(6, 6, 6, 0.87)"
+                    username-bold
+                    class="pb-2"
+            />
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-      name: "QueueSidebar",
-      props: [
-        'queue'
-      ]
-    }
+  import UserTile from './UserTile.vue'
+
+  export default {
+    name: "QueueSidebar",
+    components: {
+      UserTile
+    },
+    props: [
+      'queue'
+    ]
+  }
 </script>
 
 <style scoped>

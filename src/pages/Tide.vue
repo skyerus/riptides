@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="vertical-align-top r-sidebar row-3 pr-2 dark-bg-0 overflow-auto">
-            <ParticipantSidebar :participants="this.participants" />
+            <ParticipantSidebar :participants="this.participants"/>
         </div>
     </div>
 </template>

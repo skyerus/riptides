@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-for="(participant, index) in participants" class="pb-3">
-            <UserTile :username="index" :bio="participant.bio" :avatar="participant.avatar"/>
+        <div v-for="(participant, index) in participants" class="pt-2 pb-2">
+            <UserTile center :username="index" :bio="participant.bio" :avatar="participant.avatar"/>
         </div>
     </div>
 </template>
