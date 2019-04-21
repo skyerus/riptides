@@ -5,7 +5,7 @@
             <h3 v-if="index === 0" class="pb-2 dark-text-3">
                 Now playing
             </h3>
-            <div class="pb-2 flex-container align-center justify-start">
+            <div class="flex-container align-center justify-start">
                 <div class="vertical-align-top col-1">
                     <img :src="song.image.url" :height="song.image.height" :width="song.image.width">
                 </div>
