@@ -56,8 +56,9 @@
     },
     methods: {
       sendMessage() {
-        console.log('Attempt to emit message');
-        this.$socket.emit('message', this.message)
+        if (this.message !== '') {
+          this.$socket.emit('message', this.message)
+        }
       },
 
       joinTide() {
