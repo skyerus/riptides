@@ -51,7 +51,9 @@
     computed: {
       spotifyAuthorizeUrl: {
         get() {
-          return process.env.SPOTIFY_AUTHORIZE_URL ? process.env.SPOTIFY_AUTHORIZE_URL : '/api/spotify/authorize'
+          return (typeof process.env.SPOTIFY_AUTHORIZE_URL !== 'undefined' && process.env.SPOTIFY_AUTHORIZE_URL !== '')
+            ? process.env.SPOTIFY_AUTHORIZE_URL :
+            '/api/spotify/authorize'
         }
       }
     },
