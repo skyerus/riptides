@@ -43,18 +43,10 @@
     name: "Settings",
     data() {
       return {
+        spotifyAuthorizeUrl: process.env.SPOTIFY_AUTHORIZE_URL,
         params: new URL(document.location).searchParams,
         file: '',
         uploadLoading: false,
-      }
-    },
-    computed: {
-      spotifyAuthorizeUrl: {
-        get() {
-          return (typeof process.env.SPOTIFY_AUTHORIZE_URL !== 'undefined' && process.env.SPOTIFY_AUTHORIZE_URL !== '')
-            ? process.env.SPOTIFY_AUTHORIZE_URL :
-            '/api/spotify/authorize'
-        }
       }
     },
     methods: {
