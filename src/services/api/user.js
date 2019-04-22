@@ -120,4 +120,23 @@ export default {
       handler.handleResponse(error, this.getMyConfig, []);
     });
   },
+
+  uploadAvatar(file) {
+    let formData = new FormData()
+    formData.append('file', file)
+
+    return axios({
+      method: 'post',
+      url: 'api/auth/avatar',
+      data: formData,
+      headers: {
+        ...store.getters.headers,
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(() => {
+      this.getMyConfig()
+    }).catch((error) => {
+      handler.handleResponse(error, this.uploadAvatar, [file])
+    })
+  }
 }

@@ -20,7 +20,8 @@
                 </v-card-text>
                 <v-card-text>
                     <span>Upload avatar: </span>
-                    <input type="file" accept="image/*" id="file-input">
+                    <input type="file" id="file" ref="file" v-on:change="handleFile"/>
+                    <v-btn round color="primary" :loading="uploadLoading" @click="uploadFile(file)">Upload</v-btn>
                 </v-card-text>
                 <v-card-text>
                     <span>CONNECT ACCOUNTS</span>
@@ -35,14 +36,23 @@
 </template>
 
 <script>
-    import SpotifyApi from '../services/api/spotify'
+  import SpotifyApi from '../services/api/spotify'
+  import UserApi from '../services/api/user'
 
   export default {
     name: "Settings",
     data() {
       return {
-        spotifyAuthorizeUrl: process.env.SPOTIFY_AUTHORIZE_URL || '/api/spotify/authorize',
-        params: new URL(document.location).searchParams
+        params: new URL(document.location).searchParams,
+        file: '',
+        uploadLoading: false,
+      }
+    },
+    computed: {
+      spotifyAuthorizeUrl: {
+        get() {
+          return process.env.SPOTIFY_AUTHORIZE_URL ? process.env.SPOTIFY_AUTHORIZE_URL : '/api/spotify/authorize'
+        }
       }
     },
     methods: {
@@ -53,6 +63,17 @@
           SpotifyApi.authorize(this.params.get('code'))
         }
       },
+
+      handleFile() {
+        this.file = this.$refs.file.files[0];
+      },
+
+      uploadFile(file) {
+        this.uploadLoading = true;
+        UserApi.uploadAvatar(file).then(() => {
+          this.uploadLoading = false
+        }).catch(() => { this.uploadLoading = false })
+      }
     },
     mounted() {
       this.sendSpotifyCode();

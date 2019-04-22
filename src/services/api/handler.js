@@ -23,8 +23,10 @@ export default {
           }
         })
       });
-    } else {
+    } else if (error.response.status === 500) {
       store.dispatch('showSnackbar', 'Oops, something went wrong. Please try again later');
+    } else {
+      store.dispatch('showSnackbar', error.response.data.message);
     }
     throw error;
   },
