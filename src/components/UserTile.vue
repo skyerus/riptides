@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'text-center': center}">
+    <div :class="{'text-center': center}" :style="{ marginLeft: marginLeft }">
         <v-avatar class="center-block" :size="imageSize">
             <img :src="avatar">
         </v-avatar>
@@ -50,6 +50,10 @@
       usernameBold: {
         type: Boolean,
         default: false
+      },
+      marginLeft: {
+        type: String,
+        default: '0px'
       }
     },
     data() {
