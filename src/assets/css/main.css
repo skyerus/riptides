@@ -188,3 +188,8 @@ html, body {
     display: inline-block;
     vertical-align: middle;
 }
+.logo {
+    width: 30px;
+    height: 30px;
+    color: #fff;
+}
