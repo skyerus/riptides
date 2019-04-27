@@ -11,6 +11,7 @@ import './assets/css/main.css'
 import './assets/css/multiselect.css'
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
+import './assets/img/favicon-16x16.png'
 
 let VueScrollTo = require('vue-scrollto')
 

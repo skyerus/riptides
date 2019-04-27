@@ -40,6 +40,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/assets/index.html',
+      favicon: 'src/assets/img/favicon-16x16.png',
       minify: true
     }),
     new CopyWebpackPlugin([
