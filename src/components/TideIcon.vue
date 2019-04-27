@@ -19,7 +19,7 @@
         </v-card-title>
         <div class="overflow-auto max-height-200 scrollbar">
             <div v-for="participant in this.tide.participants">
-                <UserTile :username="participant.username" :avatar="participant.avatar"/>
+                <UserTile margin-left="20px" :username="participant.username" :avatar="participant.avatar"/>
             </div>
         </div>
         <UserToolbar :user="this.tide.user">

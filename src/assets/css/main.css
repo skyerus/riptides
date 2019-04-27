@@ -49,6 +49,9 @@ html, body {
 .dark-text-1 {
     color: #bebebe
 }
+.width-40 {
+    width: 40%;
+}
 .width-50 {
     width: 50%;
 }
