@@ -5,6 +5,7 @@ const Settings = () => import('../pages/Settings.vue')
 const Tides = () => import('../pages/Tides.vue')
 const Profile = () => import('../pages/Profile.vue')
 const Following = () => import('../pages/Following.vue')
+const Followers = () => import('../pages/Followers.vue')
 
 const routes = [
   {
@@ -49,7 +50,7 @@ const routes = [
       },
       {
         path: 'followers',
-        component: Following
+        component: Followers
       }
     ]
   }

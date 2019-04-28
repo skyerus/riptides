@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { store } from '../../store'
 import handler from './handler';
+import BuildQuery from "./BuildQuery"
 
 export default {
   login(password) {
@@ -53,29 +54,75 @@ export default {
     });
   },
 
-  getFollowing(username) {
+  getFollowingCount(username) {
     return axios({
       method: 'get',
-      url: 'api/auth/user/' + username + '/following',
+      url: `api/auth/user/${username}/following/count`,
       headers: store.getters.headers,
     }).then((response) => {
-      store.dispatch('setFollowing', response.data.following);
-      store.dispatch('setNumberOfFollowing', response.data.total);
+      store.dispatch('setNumberOfFollowing', response.data.count);
     }).catch((error) => {
-      handler.handleResponse(error, this.getFollowing, [username]);
+      handler.handleResponse(error, this.getFollowingCount, [username]);
     });
   },
 
-  getFollowers(username) {
+  getFollowersCount(username) {
     return axios({
       method: 'get',
-      url: 'api/auth/user/' + username + '/followers',
+      url: `api/auth/user/${username}/followers/count`,
       headers: store.getters.headers,
     }).then((response) => {
-      store.dispatch('setFollowers', response.data.followers);
-      store.dispatch('setNumberOfFollowers', response.data.total);
+      store.dispatch('setNumberOfFollowers', response.data.count);
     }).catch((error) => {
-      handler.handleResponse(error, this.getFollowers, [username]);
+      handler.handleResponse(error, this.getFollowersCount, [username]);
+    });
+  },
+
+  fetchFollowing(username, query) {
+    return axios({
+      method: 'get',
+      url: `api/auth/user/${username}/following${BuildQuery.buildQuery(query)}`,
+      headers: store.getters.headers,
+    })
+  },
+
+  getFollowing(username, query) {
+    this.fetchFollowing(username, query).then((response) => {
+      store.dispatch('setFollowing', response.data.following)
+    }).catch((error) => {
+      handler.handleResponse(error, this.getFollowing, [username, query]);
+    });
+  },
+
+  pushFollowing(username, query) {
+    this.fetchFollowing(username, query).then((response) => {
+      store.dispatch('pushFollowing', response.data.following)
+    }).catch((error) => {
+      handler.handleResponse(error, this.pushFollowing, [username, query]);
+    });
+  },
+
+  fetchFollowers(username, query) {
+    return axios({
+      method: 'get',
+      url: `api/auth/user/${username}/followers${BuildQuery.buildQuery(query)}`,
+      headers: store.getters.headers,
+    })
+  },
+
+  getFollowers(username, query) {
+    this.fetchFollowers(username, query).then((response) => {
+      store.dispatch('setFollowers', response.data.followers)
+    }).catch((error) => {
+      handler.handleResponse(error, this.getFollowers, [username, query]);
+    });
+  },
+
+  pushFollowers(username, query) {
+    this.fetchFollowers(username, query).then((response) => {
+      store.dispatch('pushFollowers', response.data.followers)
+    }).catch((error) => {
+      handler.handleResponse(error, this.pushFollowers, [username, query]);
     });
   },
 

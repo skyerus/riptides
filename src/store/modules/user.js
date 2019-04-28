@@ -2,15 +2,15 @@ const getDefaultState = () => {
   return {
     usernameInput: '',
     emailInput: '',
-    following: null,
-    followers: null,
-    numberOfFollowers: null,
-    numberOfFollowing: null,
+    following: [],
+    followers: [],
+    numberOfFollowers: 0,
+    numberOfFollowing: 0,
     myUser: {
       username: ''
     },
     user: {
-      user: null,
+      user: {},
       following: null
     }
   }
@@ -46,6 +46,12 @@ const actions = {
   },
   setFollowers({commit}, followers) {
     commit('setFollowers', followers);
+  },
+  pushFollowing({commit}, following) {
+    commit('pushFollowing', following)
+  },
+  pushFollowers({commit}, followers) {
+    commit('pushFollowers', followers)
   },
   setNumberOfFollowing({commit}, num) {
     commit('setNumberOfFollowing', num);
@@ -84,10 +90,16 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   setFollowing(state, following) {
-    state.following = following;
+    state.following = following
   },
   setFollowers(state, followers) {
-    state.followers = followers;
+    state.followers = followers
+  },
+  pushFollowing(state, following) {
+    state.following = [...state.following, ...following]
+  },
+  pushFollowers(state, followers) {
+    state.followers = [...state.followers, ...followers]
   },
   setNumberOfFollowing(state, num) {
     state.numberOfFollowing = num;

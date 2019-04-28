@@ -1,8 +1,8 @@
 <template>
     <div>
-        <FollowList :followList="$store.getters.following" follow="following"/>
+        <FollowList :followList="this.$store.getters.followers" follow="follower"/>
         <div class="flex-container justify-center">
-            <v-btn v-if="followingRemaining" icon @click="appendFollowing">
+            <v-btn v-if="followersRemaining" icon @click="appendFollowers">
                 <v-icon class="large-icon-1">expand_more</v-icon>
             </v-btn>
         </div>
@@ -14,7 +14,7 @@
   import UserApi from '../services/api/user'
 
   export default {
-    name: "Following",
+    name: "Followers",
     components: {
       FollowList
     },
@@ -25,8 +25,8 @@
       }
     },
     computed: {
-      followingRemaining() {
-        return this.$store.getters.numberOfFollowing > this.$store.getters.following.length
+      followersRemaining() {
+        return this.$store.getters.numberOfFollowers > this.$store.getters.followers.length
       },
       offset() {
         return this.pageLength * (this.page - 1)
@@ -36,16 +36,16 @@
       },
     },
     methods: {
-      appendFollowing() {
+      appendFollowers() {
         this.page++
-        UserApi.pushFollowing(this.$route.params.username, {
+        UserApi.pushFollowers(this.$route.params.username, {
           offset: this.offset,
           limit: this.limit
         })
       }
     },
     mounted() {
-      UserApi.getFollowing(this.$route.params.username, {
+      UserApi.getFollowers(this.$route.params.username, {
         offset: this.offset,
         limit: this.limit
       })
