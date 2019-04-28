@@ -24,7 +24,7 @@
         </div>
         <UserToolbar :user="this.tide.user">
             <v-spacer/>
-            <span v-for="genre in tide.genres" class="tag hover-cursor">
+            <span v-for="genre in tide.genres" class="tag">
                 {{ genre.name }}
             </span>
             <v-btn icon>

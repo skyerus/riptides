@@ -153,6 +153,7 @@ html, body {
     border-radius: 5px;
     white-space: nowrap;
     overflow: hidden;
+    cursor: default;
 }
 .tag:hover {
     overflow: visible;

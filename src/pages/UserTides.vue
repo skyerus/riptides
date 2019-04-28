@@ -1,9 +1,9 @@
 <template>
-    <div class="pa-4">
+    <div>
         <CreateTide v-if="popupOpen"
                     :popupOpen="popupOpen"
                     @popupClose="popupOpen = false"
-                    @tideCreated="$router.push(`/${$store.getters.username}/tides`)"
+                    @tideCreated="$refs.infiniteLoading.stateChanger.reset()"
         />
         <TidesGrid :tides="tides">
             <template v-slot:header>
@@ -12,21 +12,21 @@
                 </v-layout>
             </template>
         </TidesGrid>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
     </div>
 </template>
 
 <script>
-  import tidesApi from '../services/api/tides'
-  import handler from '../services/api/handler'
   import TidesGrid from '../components/TidesGrid.vue'
   import CreateTide from '../components/CreateTide.vue'
+  import tidesApi from '../services/api/tides'
+  import handler from '../services/api/handler'
 
   export default {
-    name: "Tides",
+    name: "UserTides",
     components: {
-      CreateTide,
-      TidesGrid
+      TidesGrid,
+      CreateTide
     },
     data() {
       return {
@@ -44,7 +44,7 @@
     methods: {
       infiniteHandler($state) {
         this.page++
-        tidesApi.getTides({
+        tidesApi.getUserTides(this.$route.params.username, {
           offset: this.offset,
           limit: this.pageLength,
         }).then((response) => {
@@ -68,4 +68,5 @@
 </script>
 
 <style scoped>
+
 </style>

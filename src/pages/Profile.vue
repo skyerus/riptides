@@ -1,9 +1,7 @@
 <template>
     <div>
         <Tabs/>
-        <v-flex md5 xs10 class="ma-auto">
-            <router-view/>
-        </v-flex>
+        <router-view/>
     </div>
 </template>
 

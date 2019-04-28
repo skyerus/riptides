@@ -31,5 +31,13 @@ export default {
       url: `api/tides${BuildQuery.buildQuery(query)}`,
       headers: store.getters.headers
     })
+  },
+
+  getUserTides(username, query) {
+    return axios({
+      method: 'get',
+      url: `api/auth/user/${username}/tides${BuildQuery.buildQuery(query)}`,
+      headers: store.getters.headers
+    })
   }
 }

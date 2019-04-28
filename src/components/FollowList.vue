@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="width-40 ma-auto">
         <v-list two-line class="mt-3 pa-0">
             <div v-for="(follow, index) in this.followList"
                  :key="index">

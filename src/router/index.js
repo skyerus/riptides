@@ -6,6 +6,7 @@ const Tides = () => import('../pages/Tides.vue')
 const Profile = () => import('../pages/Profile.vue')
 const Following = () => import('../pages/Following.vue')
 const Followers = () => import('../pages/Followers.vue')
+const UserTides = () => import('../pages/UserTides.vue')
 
 const routes = [
   {
@@ -36,9 +37,9 @@ const routes = [
         path: '', redirect: 'tides'
       },
       {
-        name: 'myTides',
+        name: 'userTides',
         path: 'tides',
-        component: Following,
+        component: UserTides,
       },
       {
         path: 'favorites',
