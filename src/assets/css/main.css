@@ -196,3 +196,10 @@ html, body {
     height: 34px;
     color: #fff;
 }
+.f-column {
+    flex-direction: column;
+}
+.small-btn {
+    width: 30px;
+    height: 20px;
+}

@@ -1,12 +1,21 @@
 <template>
     <div class="flex-container">
         <div class="flex-col flex-container justify-end">
-            <UserTile :username="this.getUser().username"
-                      :bio="this.getUser().bio"
-                      :avatar="this.getUser().avatar"
-                      class="pt-1 pr-5"
-                      style="text-transform: none !important;"
-            />
+            <div class="flex-container pr-5 pt-1 align-center">
+                <UserTile :username="this.getUser().username"
+                          :bio="this.getUser().bio"
+                          :avatar="this.getUser().avatar"
+                          style="text-transform: none !important;"
+                />
+                <div v-if="$route.params.username !== $store.getters.username">
+                    <v-btn v-if="$store.getters.isFollowing" class="small-btn" outline color="primary" @click="unfollow(user.username)">
+                        following
+                    </v-btn>
+                    <v-btn v-else color="primary" class="small-btn" @click="follow(user.username)">
+                        follow
+                    </v-btn>
+                </div>
+            </div>
         </div>
         <div class="flex-col">
             <v-tabs
@@ -28,13 +37,7 @@
                 </v-tab>
             </v-tabs>
         </div>
-        <div class="flex-col flex-container align-center pl-5">
-            <v-btn v-if="$store.getters.isFollowing" outline small color="primary" @click="unfollow(user.username)">
-                following
-            </v-btn>
-            <v-btn v-else small color="primary" @click="follow(user.username)">
-                follow
-            </v-btn>
+        <div class="flex-col">
         </div>
     </div>
 </template>
@@ -78,6 +81,16 @@
       }
     },
     computed: {
+      numberOfFollowing: {
+        get() {
+          return this.$store.getters.numberOfFollowing
+        }
+      },
+      numberOfFollowers: {
+        get() {
+          return this.$store.getters.numberOfFollowers
+        }
+      },
       user: {
         get() {
           return this.$store.getters.user
@@ -91,11 +104,11 @@
     },
     watch: {
       numberOfFollowing: function(val) {
-        this.tabs[3].number = val;
+        this.tabs[2].number = val;
       },
 
       numberOfFollowers: function(val) {
-        this.tabs[4].number = val;
+        this.tabs[3].number = val;
       },
     },
     methods: {
@@ -109,7 +122,7 @@
       follow(username) {
         UserApi.followUser(username).then(() => {
           this.$store.dispatch('followUser', true);
-          this.tabs[4].number++;
+          this.tabs[3].number++;
         }).catch((error) => {
           handler.handleResponse(error, this.follow, [username]);
         })
@@ -118,7 +131,7 @@
       unfollow(username) {
         UserApi.unfollowUser(username).then(() => {
           this.$store.dispatch('followUser', false);
-          this.tabs[4].number--;
+          this.tabs[3].number--;
         }).catch((error) => {
           handler.handleResponse(error, this.unfollow, [username]);
         })
