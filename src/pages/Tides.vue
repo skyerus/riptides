@@ -1,6 +1,10 @@
 <template>
     <div class="pa-4">
-        <CreateTide v-if="popupOpen" :popupOpen="popupOpen" @popupClose="popupOpen = false"/>
+        <CreateTide v-if="popupOpen"
+                    :popupOpen="popupOpen"
+                    @popupClose="popupOpen = false"
+                    @tideCreated="getTides"
+        />
         <v-layout>
             <v-flex xs1 md2>
 
@@ -10,7 +14,7 @@
                     <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
                 </v-layout>
                 <v-container grid-list-lg>
-                    <v-layout class="pt-3">
+                    <v-layout class="pt-3" wrap>
                         <v-flex sm12 md4 v-for="tide in tides">
                             <TideIcon :tide="tide"/>
                         </v-flex>
@@ -21,6 +25,7 @@
 
             </v-flex>
         </v-layout>
+        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
 
@@ -34,26 +39,44 @@
     name: "Tides",
     components: {
       TideIcon,
-      CreateTide
+      CreateTide,
     },
     data() {
       return {
         popupOpen: false,
-        tides: []
+        tides: [],
+        pageLength: 12,
+        page: 0,
       }
     },
+    computed: {
+      offset() {
+        return this.pageLength * (this.page - 1)
+      },
+    },
     methods: {
-      getTides() {
-        tidesApi.getTides().then((response) => {
-          this.tides = response.data
+      infiniteHandler($state) {
+        this.page++
+        tidesApi.getTides({
+          offset: this.offset,
+          limit: this.pageLength,
+        }).then((response) => {
+          if (response.data.length) {
+            this.tides.push(...response.data)
+            if (response.data.length !== this.pageLength) {
+              return $state.complete()
+            }
+            $state.loaded()
+          } else {
+            this.page--
+            $state.complete()
+          }
         }).catch((err) => {
-          handler.handleResponse(err, this.getTides)
+          this.page--
+          handler.handleResponse(err, this.infiniteHandler, [$state])
         })
       }
     },
-    mounted() {
-      this.getTides()
-    }
   }
 </script>
 

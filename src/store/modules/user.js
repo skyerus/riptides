@@ -2,8 +2,6 @@ const getDefaultState = () => {
   return {
     usernameInput: '',
     emailInput: '',
-    following: [],
-    followers: [],
     numberOfFollowers: 0,
     numberOfFollowing: 0,
     myUser: {
@@ -41,18 +39,6 @@ const actions = {
   resetUserState({commit}) {
     commit('resetState');
   },
-  setFollowing({commit}, following) {
-    commit('setFollowing', following);
-  },
-  setFollowers({commit}, followers) {
-    commit('setFollowers', followers);
-  },
-  pushFollowing({commit}, following) {
-    commit('pushFollowing', following)
-  },
-  pushFollowers({commit}, followers) {
-    commit('pushFollowers', followers)
-  },
   setNumberOfFollowing({commit}, num) {
     commit('setNumberOfFollowing', num);
   },
@@ -88,18 +74,6 @@ const mutations = {
   },
   resetState (state) {
     Object.assign(state, getDefaultState())
-  },
-  setFollowing(state, following) {
-    state.following = following
-  },
-  setFollowers(state, followers) {
-    state.followers = followers
-  },
-  pushFollowing(state, following) {
-    state.following = [...state.following, ...following]
-  },
-  pushFollowers(state, followers) {
-    state.followers = [...state.followers, ...followers]
   },
   setNumberOfFollowing(state, num) {
     state.numberOfFollowing = num;

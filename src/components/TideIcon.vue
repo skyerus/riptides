@@ -23,7 +23,14 @@
             </div>
         </div>
         <UserToolbar :user="this.tide.user">
-            <v-spacer/><span v-for="genre in tide.genres" class="tag">{{ genre.name }}</span>
+            <v-spacer/>
+            <span v-for="genre in tide.genres" class="tag hover-cursor">
+                {{ genre.name }}
+            </span>
+            <v-btn icon>
+                <v-icon v-if="tide.favorited" color="red" @click="unfavorite">favorite</v-icon>
+                <v-icon v-else @click="favorite">favorite</v-icon>
+            </v-btn>
         </UserToolbar>
     </v-card>
 </template>

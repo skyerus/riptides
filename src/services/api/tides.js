@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { store } from '../../store'
+import BuildQuery from "./BuildQuery"
 
 export default {
   getGenres() {
@@ -24,10 +25,10 @@ export default {
     })
   },
 
-  getTides() {
+  getTides(query) {
     return axios({
       method: 'get',
-      url: 'api/tides',
+      url: `api/tides${BuildQuery.buildQuery(query)}`,
       headers: store.getters.headers
     })
   }

@@ -151,6 +151,11 @@ html, body {
     margin: 0 6px 0 0;
     background-color: #303030;
     border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.tag:hover {
+    overflow: visible;
 }
 .scrollbar::-webkit-scrollbar-track
 {

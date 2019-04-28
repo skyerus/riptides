@@ -1,17 +1,14 @@
 <template>
     <div>
-        <FollowList :followList="$store.getters.following" follow="following"/>
-        <div class="flex-container justify-center">
-            <v-btn v-if="followingRemaining" icon @click="appendFollowing">
-                <v-icon class="large-icon-1">expand_more</v-icon>
-            </v-btn>
-        </div>
+        <FollowList :followList="following" follow="following"/>
+        <infinite-loading class="pt-2" @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
 
 <script>
   import FollowList from '../components/FollowList.vue'
   import UserApi from '../services/api/user'
+  import handler from '../services/api/handler'
 
   export default {
     name: "Following",
@@ -21,35 +18,38 @@
     data() {
       return {
         pageLength: 10,
-        page: 1,
+        page: 0,
+        following: [],
       }
     },
     computed: {
-      followingRemaining() {
-        return this.$store.getters.numberOfFollowing > this.$store.getters.following.length
-      },
       offset() {
         return this.pageLength * (this.page - 1)
       },
-      limit() {
-        return this.pageLength * this.page
-      },
     },
     methods: {
-      appendFollowing() {
+      infiniteHandler($state) {
         this.page++
-        UserApi.pushFollowing(this.$route.params.username, {
+        UserApi.fetchFollowing(this.$route.params.username, {
           offset: this.offset,
-          limit: this.limit
+          limit: this.pageLength,
+        }).then((response) => {
+          if (response.data.following.length) {
+            this.following.push(...response.data.following)
+            if (response.data.following.length !== this.pageLength) {
+              return $state.complete()
+            }
+            $state.loaded()
+          } else {
+            this.page--
+            $state.complete()
+          }
+        }).catch((err) => {
+          this.page--
+          handler.handleResponse(err, this.infiniteHandler, [$state])
         })
       }
     },
-    mounted() {
-      UserApi.getFollowing(this.$route.params.username, {
-        offset: this.offset,
-        limit: this.limit
-      })
-    }
   }
 </script>
 
