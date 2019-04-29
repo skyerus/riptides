@@ -39,5 +39,13 @@ export default {
       url: `api/auth/user/${username}/tides${BuildQuery.buildQuery(query)}`,
       headers: store.getters.headers
     })
+  },
+
+  getFavoriteTides(username, query) {
+    return axios({
+      method: 'get',
+      url: `api/auth/user/${username}/tides/favorite${BuildQuery.buildQuery(query)}`,
+      headers: store.getters.headers
+    })
   }
 }

@@ -32,7 +32,7 @@
       return {
         popupOpen: false,
         tides: [],
-        pageLength: 12,
+        pageLength: 9,
         page: 0,
       }
     },

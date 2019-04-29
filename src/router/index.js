@@ -7,6 +7,7 @@ const Profile = () => import('../pages/Profile.vue')
 const Following = () => import('../pages/Following.vue')
 const Followers = () => import('../pages/Followers.vue')
 const UserTides = () => import('../pages/UserTides.vue')
+const Favorites = () => import('../pages/Favorites.vue')
 
 const routes = [
   {
@@ -43,7 +44,7 @@ const routes = [
       },
       {
         path: 'favorites',
-        component: Following
+        component: Favorites
       },
       {
         path: 'following',
