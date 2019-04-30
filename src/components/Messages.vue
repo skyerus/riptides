@@ -2,11 +2,21 @@
     <div class="overflow-auto scrollbar-light" ref="chat">
         <template v-for="(item, index) in logs">
             <div>
-                <v-list-tile-avatar v-if="typeof item.avatar !== 'undefined'" class="ml-2 center-block" size="40px">
-                    <img :src="item.avatar">
-                </v-list-tile-avatar>
+                <router-link v-if="typeof item.username !== 'undefined'" :to="`/${item.username}`">
+                    <v-list-tile-avatar
+                            v-if="typeof item.avatar !== 'undefined'"
+                            class="ml-2 center-block"
+                            size="40px"
+                    >
+                        <img :src="item.avatar">
+                    </v-list-tile-avatar>
+                </router-link>
                 <div class="center-block">
-                    <h3 v-if="typeof item.username !== 'undefined'" class="font-weight-bold dark-text-3">{{ item.username }}</h3>
+                    <router-link v-if="typeof item.username !== 'undefined'" :to="`/${item.username}`">
+                        <h3 class="font-weight-bold dark-text-3 hover-cursor hover-underline">
+                            {{ item.username }}
+                        </h3>
+                    </router-link>
                     <div v-for="message in item.message">
                         <div v-if="item.type === 'standard'" :key="index" class="medium-text">{{ message }}</div>
                         <div v-if="item.type === 'italic'">
@@ -50,7 +60,7 @@
           return;
         }
         this.scrolled = false;
-      }
+      },
     },
     watch: {
       logsUpdate() {
@@ -67,4 +77,7 @@
 </script>
 
 <style scoped>
+    div a {
+        text-decoration: none;
+    }
 </style>

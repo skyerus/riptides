@@ -1,11 +1,21 @@
 <template>
     <div :class="{'text-center': center}" :style="{ marginLeft: marginLeft }">
-        <v-avatar class="center-block" :size="imageSize">
-            <img :src="avatar">
-        </v-avatar>
+        <router-link :to="`/${this.username}`">
+            <v-avatar
+                    class="center-block"
+                    :size="imageSize"
+            >
+                <img :src="avatar">
+            </v-avatar>
+        </router-link>
         <div class="center-block" :style="gapStyle">
-            <div :style="usernameStyle" :class="{ 'font-weight-bold': usernameBold }">
-                {{ username }}
+            <div :style="usernameStyle"
+                 :class="{ 'font-weight-bold': usernameBold }"
+                 class="hover-underline hover-cursor"
+            >
+                <router-link :to="`/${this.username}`">
+                    {{ username }}
+                </router-link>
             </div>
             <div v-if="typeof bio !== 'undefined'">
                 {{ bio }}
@@ -66,10 +76,13 @@
           marginLeft: this.gap
         },
       }
-    }
+    },
   }
 </script>
 
 <style scoped>
-
+    div a {
+        text-decoration: none;
+        color: #fff;
+    }
 </style>
