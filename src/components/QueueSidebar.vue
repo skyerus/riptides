@@ -14,16 +14,19 @@
                     <div>{{ song.artist }}</div>
                 </div>
             </div>
-            <UserTile
-                    :username="song.user.username"
-                    :avatar="song.user.avatar"
-                    gap="3px"
-                    imageSize="30px"
-                    usernameSize="14px"
-                    username-color="rgba(6, 6, 6, 0.87)"
-                    username-bold
-                    class="pb-2"
-            />
+            <div class="pb-2">
+                <UserTile
+                        :username="song.user.username"
+                        :avatar="song.user.avatar"
+                        gap="3px"
+                        imageSize="30px"
+                        usernameSize="14px"
+                        username-color="rgba(6, 6, 6, 0.87)"
+                        username-bold
+                        class="d-inline-block"
+                />
+                <v-icon class="ml-auto center">skip_next</v-icon>
+            </div>
         </div>
     </div>
 </template>
@@ -48,5 +51,8 @@
     }
     .col-2 {
         flex: 1 1 auto;
+    }
+    .center {
+        text-align: center;
     }
 </style>

@@ -11,10 +11,10 @@
         <v-card-title v-if="tide.tags.length > 0">
             <span class="headline nice-grey">Tags</span><v-spacer/><span v-for="tag in tide.tags" class="tag">{{ tag.name }}</span>
         </v-card-title>
-        <v-card-title>
-            <span class="headline nice-grey">Participants</span>
+        <v-card-title class="headline nice-grey">
+            <span>Participants</span><span class="ml-auto">{{ participantCount }}</span>
         </v-card-title>
-        <v-card-title v-if="this.tide.participants.length === 0">
+        <v-card-title v-if="tide.participantCount === 0">
             <span class="ma-auto nice-grey">Empty</span>
         </v-card-title>
         <div class="overflow-auto max-height-200 scrollbar">
@@ -50,6 +50,14 @@
     ],
     data() {
       return {
+      }
+    },
+    computed: {
+      participantCount() {
+        if (this.tide.participantCount > 0) {
+          return this.tide.participantCount
+        }
+        return ''
       }
     }
   }
