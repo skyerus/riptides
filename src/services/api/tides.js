@@ -26,9 +26,10 @@ export default {
   },
 
   getTides(query) {
+    let url = store.getters.isLoggedIn ? 'api/auth/tides' : 'api/tides'
     return axios({
       method: 'get',
-      url: `api/tides${BuildQuery.buildQuery(query)}`,
+      url: `${url}${BuildQuery.buildQuery(query)}`,
       headers: store.getters.headers
     })
   },
@@ -47,5 +48,21 @@ export default {
       url: `api/auth/user/${username}/tides/favorite${BuildQuery.buildQuery(query)}`,
       headers: store.getters.headers
     })
-  }
+  },
+
+  favoriteTide(id) {
+    return axios({
+      method: 'put',
+      url: `api/auth/tides/${id}/favorite`,
+      headers: store.getters.headers
+    })
+  },
+
+  unfavoriteTide(id) {
+    return axios({
+      method: 'put',
+      url: `api/auth/tides/${id}/unfavorite`,
+      headers: store.getters.headers
+    })
+  },
 }

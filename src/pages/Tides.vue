@@ -7,7 +7,7 @@
         />
         <TidesGrid :tides="tides">
             <template v-slot:header>
-                <v-layout>
+                <v-layout v-if="$store.getters.isLoggedIn">
                     <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
                 </v-layout>
             </template>

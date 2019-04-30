@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FollowList :followList="this.$store.getters.followers" follow="follower"/>
+        <FollowList :followList.sync="followers" @handleFollow="handleFollow"/>
         <infinite-loading class="pt-2" @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
@@ -48,7 +48,10 @@
           this.page--
           handler.handleResponse(err, this.infiniteHandler, [$state])
         })
-      }
+      },
+      handleFollow({index, bool}) {
+        this.followers[index].following = bool
+      },
     },
   }
 </script>

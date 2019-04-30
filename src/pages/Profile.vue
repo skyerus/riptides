@@ -17,9 +17,7 @@
     },
     methods: {
       clearProfileStore() {
-        this.$store.dispatch('setFollowing', []);
         this.$store.dispatch('setNumberOfFollowing', 0);
-        this.$store.dispatch('setFollowers', []);
         this.$store.dispatch('setNumberOfFollowers', 0);
         this.$store.dispatch('setUser', {});
         this.$store.dispatch('setUserFollowing', null);
@@ -45,7 +43,7 @@
       next()
     },
     beforeRouteLeave(to, from, next) {
-      this.clearProfileStore();
+      this.clearProfileStore()
       next()
     },
   }

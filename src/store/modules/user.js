@@ -20,8 +20,6 @@ const getters = {
   emailInput: state => state.emailInput,
   usernameInput: state => state.usernameInput,
   username: state => state.myUser.username,
-  following: state => state.following,
-  followers: state => state.followers,
   numberOfFollowers: state => state.numberOfFollowers,
   numberOfFollowing: state => state.numberOfFollowing,
   myUser: state => state.myUser,
@@ -54,12 +52,6 @@ const actions = {
   setMyUser({commit}, user) {
     commit('setMyUser', user);
   },
-  setFollowingByIndex({commit}, params) {
-    commit('setFollowingByIndex', params);
-  },
-  setFollowerByIndex({commit}, params) {
-    commit('setFollowerByIndex', params);
-  },
   followUser({commit}, bool) {
     commit('followUser', bool);
   }
@@ -89,12 +81,6 @@ const mutations = {
   },
   setUserFollowing(state, user) {
     state.user.following = user;
-  },
-  setFollowingByIndex(state, params) {
-    state.following[params.index].following = params.bool;
-  },
-  setFollowerByIndex(state, params) {
-    state.followers[params.index].following = params.bool;
   },
   followUser(state, bool) {
     state.user.following = bool;

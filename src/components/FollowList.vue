@@ -46,40 +46,22 @@
     name: "FollowList",
     props: [
       'followList',
-      'follow'
     ],
     data() {
       return {
-
       }
     },
     methods: {
       followUser(index, username) {
-        let params = {
-          index: index,
-          bool: true
-        };
         UserApi.followUser(username).then(() => {
-          if (this.follow === 'following') {
-            this.$store.dispatch('setFollowingByIndex', params);
-          } else {
-            this.$store.dispatch('setFollowerByIndex', params);
-          }
+          this.$emit('handleFollow', {index: index, bool: true})
         }).catch((error) => {
           handler.handleResponse(error, this.followUser, [index, username]);
         })
       },
       unfollowUser(index, username) {
-        let params = {
-          index: index,
-          bool: false
-        };
         UserApi.unfollowUser(username).then(() => {
-          if (this.follow === 'following') {
-            this.$store.dispatch('setFollowingByIndex', params);
-          } else {
-            this.$store.dispatch('setFollowerByIndex', params);
-          }
+          this.$emit('handleFollow', {index: index, bool: false})
         }).catch((error) => {
           handler.handleResponse(error, this.unfollowUser, [index, username]);
         })

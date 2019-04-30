@@ -17,7 +17,7 @@
         <v-card-title v-if="tide.participantCount === 0">
             <span class="ma-auto nice-grey">Empty</span>
         </v-card-title>
-        <div class="overflow-auto max-height-200 scrollbar">
+        <div class="overflow-auto max-height-300 scrollbar">
             <div v-for="participant in this.tide.participants">
                 <UserTile margin-left="20px" :username="participant.username" :avatar="participant.avatar"/>
             </div>
@@ -28,8 +28,8 @@
                 {{ genre.name }}
             </span>
             <v-btn icon>
-                <v-icon v-if="tide.favorited" color="red" @click="unfavorite">favorite</v-icon>
-                <v-icon v-else @click="favorite">favorite</v-icon>
+                <v-icon v-if="favorited" color="red" @click="unfavorite(tide.id)">favorite</v-icon>
+                <v-icon v-else @click="favorite(tide.id)">favorite</v-icon>
             </v-btn>
         </UserToolbar>
     </v-card>
@@ -38,6 +38,8 @@
 <script>
   import UserToolbar from './UserToolbar.vue'
   import UserTile from './UserTile.vue'
+  import tidesApi from '../services/api/tides'
+  import handler from '../services/api/handler'
 
   export default {
     name: "TideIcon",
@@ -50,6 +52,7 @@
     ],
     data() {
       return {
+        favorited: this.tide.favorited
       }
     },
     computed: {
@@ -58,14 +61,31 @@
           return this.tide.participantCount
         }
         return ''
+      },
+    },
+    methods: {
+      favorite(id) {
+        tidesApi.favoriteTide(id).then(() => {
+          this.favorited = true
+        }).catch((error) => {
+          handler.handleResponse(error, this.favorite, [id])
+        })
+      },
+
+      unfavorite(id) {
+        tidesApi.unfavoriteTide(id).then(() => {
+          this.favorited = false
+        }).catch((error) => {
+          handler.handleResponse(error, this.unfavorite, [id])
+        })
       }
     }
   }
 </script>
 
 <style scoped>
-    .max-height-200 {
+    .max-height-300 {
         display: block;
-        max-height: 200px;
+        max-height: 300px;
     }
 </style>
