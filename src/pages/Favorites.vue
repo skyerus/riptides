@@ -1,36 +1,23 @@
 <template>
-    <div class="pa-4">
-        <CreateTide v-if="popupOpen"
-                    :popupOpen="popupOpen"
-                    @popupClose="popupOpen = false"
-                    @tideCreated="$router.push(`/${$store.getters.username}/tides`)"
-        />
+    <div class="pa-2">
         <TidesGrid :tides="tides">
-            <template v-slot:header>
-                <v-layout v-if="$store.getters.isLoggedIn">
-                    <v-btn @click="popupOpen = !popupOpen">Create tide</v-btn>
-                </v-layout>
-            </template>
         </TidesGrid>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
 
 <script>
+  import TidesGrid from '../components/TidesGrid.vue'
   import tidesApi from '../services/api/tides'
   import handler from '../services/api/handler'
-  import TidesGrid from '../components/TidesGrid.vue'
-  import CreateTide from '../components/CreateTide.vue'
 
   export default {
-    name: "Tides",
+    name: "Favorites",
     components: {
-      CreateTide,
       TidesGrid
     },
     data() {
       return {
-        popupOpen: false,
         tides: [],
         pageLength: 9,
         page: 0,
@@ -44,7 +31,7 @@
     methods: {
       infiniteHandler($state) {
         this.page++
-        tidesApi.getTides({
+        tidesApi.getFavoriteTides(this.$route.params.username, {
           offset: this.offset,
           limit: this.pageLength,
         }).then((response) => {
@@ -63,9 +50,10 @@
           handler.handleResponse(err, this.infiniteHandler, [$state])
         })
       }
-    },
+    }
   }
 </script>
 
 <style scoped>
+
 </style>

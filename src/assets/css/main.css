@@ -49,6 +49,9 @@ html, body {
 .dark-text-1 {
     color: #bebebe
 }
+.width-40 {
+    width: 40%;
+}
 .width-50 {
     width: 50%;
 }
@@ -148,6 +151,12 @@ html, body {
     margin: 0 6px 0 0;
     background-color: #303030;
     border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: default;
+}
+.tag:hover {
+    overflow: visible;
 }
 .scrollbar::-webkit-scrollbar-track
 {
@@ -192,4 +201,14 @@ html, body {
     width: 34px;
     height: 34px;
     color: #fff;
+}
+.f-column {
+    flex-direction: column;
+}
+.small-btn {
+    width: 30px;
+    height: 20px;
+}
+.no-decoration {
+    text-decoration: none;
 }

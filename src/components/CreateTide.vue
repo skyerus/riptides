@@ -113,6 +113,7 @@
           this.tagsValues = []
           this.name = ''
           this.about = ''
+          this.$emit('tideCreated')
           this.open = false
         }).catch((err) => {
           handler.handleResponse(err, this.create, [genreValues, tagValues, name, about])

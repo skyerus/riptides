@@ -162,7 +162,11 @@
         if (this.$store.getters.isLoggedIn) {
           handler.handleSocketError(401);
         }
-      }
+      },
+      notification: function (data) {
+        console.log(data)
+        this.$store.dispatch('showSnackbar', data)
+      },
     }
   }
 </script>

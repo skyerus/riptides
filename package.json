@@ -8,6 +8,7 @@
     "dotenv-webpack": "^1.7.0",
     "socket.io-client": "^2.2.0",
     "vue": "^2.6.8",
+    "vue-infinite-loading": "^2.4.4",
     "vue-multiselect": "^2.1.4",
     "vue-router": "^3.0.2",
     "vue-scrollto": "^2.14.0",

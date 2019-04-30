@@ -2,15 +2,13 @@ const getDefaultState = () => {
   return {
     usernameInput: '',
     emailInput: '',
-    following: null,
-    followers: null,
-    numberOfFollowers: null,
-    numberOfFollowing: null,
+    numberOfFollowers: 0,
+    numberOfFollowing: 0,
     myUser: {
       username: ''
     },
     user: {
-      user: null,
+      user: {},
       following: null
     }
   }
@@ -22,8 +20,6 @@ const getters = {
   emailInput: state => state.emailInput,
   usernameInput: state => state.usernameInput,
   username: state => state.myUser.username,
-  following: state => state.following,
-  followers: state => state.followers,
   numberOfFollowers: state => state.numberOfFollowers,
   numberOfFollowing: state => state.numberOfFollowing,
   myUser: state => state.myUser,
@@ -41,12 +37,6 @@ const actions = {
   resetUserState({commit}) {
     commit('resetState');
   },
-  setFollowing({commit}, following) {
-    commit('setFollowing', following);
-  },
-  setFollowers({commit}, followers) {
-    commit('setFollowers', followers);
-  },
   setNumberOfFollowing({commit}, num) {
     commit('setNumberOfFollowing', num);
   },
@@ -61,12 +51,6 @@ const actions = {
   },
   setMyUser({commit}, user) {
     commit('setMyUser', user);
-  },
-  setFollowingByIndex({commit}, params) {
-    commit('setFollowingByIndex', params);
-  },
-  setFollowerByIndex({commit}, params) {
-    commit('setFollowerByIndex', params);
   },
   followUser({commit}, bool) {
     commit('followUser', bool);
@@ -83,12 +67,6 @@ const mutations = {
   resetState (state) {
     Object.assign(state, getDefaultState())
   },
-  setFollowing(state, following) {
-    state.following = following;
-  },
-  setFollowers(state, followers) {
-    state.followers = followers;
-  },
   setNumberOfFollowing(state, num) {
     state.numberOfFollowing = num;
   },
@@ -103,12 +81,6 @@ const mutations = {
   },
   setUserFollowing(state, user) {
     state.user.following = user;
-  },
-  setFollowingByIndex(state, params) {
-    state.following[params.index].following = params.bool;
-  },
-  setFollowerByIndex(state, params) {
-    state.followers[params.index].following = params.bool;
   },
   followUser(state, bool) {
     state.user.following = bool;

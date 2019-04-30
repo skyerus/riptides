@@ -12,6 +12,7 @@ import './assets/css/multiselect.css'
 import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 import './assets/img/favicon-16x16.png'
+import InfiniteLoading from 'vue-infinite-loading'
 
 let VueScrollTo = require('vue-scrollto')
 
@@ -19,6 +20,12 @@ Vue.use(Vuetify)
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueScrollTo)
+Vue.use(InfiniteLoading, {
+  slots: {
+    noResults: 'No more results',
+    noMore: 'No more results',
+  },
+})
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = process.env.API_URL;
