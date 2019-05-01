@@ -11,7 +11,7 @@
         <div class="center-block" :style="gapStyle">
             <div :style="usernameStyle"
                  :class="{ 'font-weight-bold': usernameBold }"
-                 class="hover-underline hover-cursor"
+                 class="hover-underline"
             >
                 <router-link :to="`/${this.username}`">
                     {{ username }}

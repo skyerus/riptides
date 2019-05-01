@@ -3,11 +3,15 @@
             dense
             height="35px"
     >
-        <v-avatar size="25px">
-            <img :src="this.user.avatar">
-        </v-avatar>
-        <span class="ml-1 small-text">
+        <router-link :to="`/${user.username}`">
+            <v-avatar size="25px">
+                <img :src="this.user.avatar">
+            </v-avatar>
+        </router-link>
+        <span class="ml-1 small-text hover-underline pr-1">
+            <router-link :to="`/${user.username}`">
             {{ this.user.username }}
+            </router-link>
         </span>
         <slot/>
     </v-toolbar>
@@ -23,5 +27,8 @@
 </script>
 
 <style scoped>
-
+    div a {
+        text-decoration: none;
+        color: #fff;
+    }
 </style>
