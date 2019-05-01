@@ -23,9 +23,7 @@
                         usernameSize="14px"
                         username-color="rgba(6, 6, 6, 0.87)"
                         username-bold
-                        class="d-inline-block"
                 />
-                <v-icon class="ml-auto center">skip_next</v-icon>
             </div>
         </div>
     </div>
