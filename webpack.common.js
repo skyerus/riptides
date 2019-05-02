@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 var path = require('path')
@@ -38,11 +37,6 @@ module.exports = {
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/assets/index.html',
-      favicon: 'src/assets/img/favicon-16x16.png',
-      minify: true
-    }),
     new CopyWebpackPlugin([
       {
         from: 'src/assets/img/',
