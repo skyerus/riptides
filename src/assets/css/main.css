@@ -46,6 +46,9 @@ html, body {
 .text-center {
     text-align: center;
 }
+.text-end {
+    text-align: end;
+}
 .dark-text-1 {
     color: #bebebe
 }

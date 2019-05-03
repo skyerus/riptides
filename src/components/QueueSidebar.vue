@@ -14,7 +14,7 @@
                     <div>{{ song.artist }}</div>
                 </div>
             </div>
-            <div class="pb-2">
+            <div class="pb-2 flex-container align-center">
                 <UserTile
                         :username="song.user.username"
                         :avatar="song.user.avatar"
@@ -24,6 +24,14 @@
                         username-color="rgba(6, 6, 6, 0.87)"
                         username-bold
                 />
+                <div class="flex-container ml-auto align-center">
+                    <div class="pr-1">
+                        <v-btn icon flat>
+                            <v-icon v-if="index === 0" size="25px">skip_next</v-icon>
+                            <v-icon v-else size="25px">clear</v-icon>
+                        </v-btn>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@
     .col-2 {
         flex: 1 1 auto;
     }
-    .center {
-        text-align: center;
+    .v-btn {
+        margin: 0;
     }
 </style>
