@@ -10,11 +10,18 @@
                         <v-text-field
                             v-model="message"
                             outline
-                            label="Message"
+                            single-line
+                            :label="inputPlaceholder"
                             append-icon="send"
-                            @click:append="sendMessage"
-                            @keyup.enter="sendMessage"
-                        ></v-text-field>
+                            @click:append="handleMessage"
+                            @keyup.enter="handleMessage"
+                        >
+                            <template v-slot:prepend-inner>
+                                <v-icon class="pr-1" :class="{ 'riptides-icon': spin }" @click="toggleMessage">
+                                    $vuetify.icons.riptides
+                                </v-icon>
+                            </template>
+                        </v-text-field>
                     </div>
                 </div>
                 <Messages ref="messages" :logsUpdate="logsUpdate" :logs="logs"/>
@@ -46,18 +53,27 @@
         participants: {},
         queue: [],
         logsUpdate: false,
+        playText: false,
+        spin: false,
       }
     },
     computed: {
-      isLoggedIn: {
-        get() {
-          return this.$store.getters.isLoggedIn
-        }
+      isLoggedIn() {
+        return this.$store.getters.isLoggedIn
+      },
+      inputPlaceholder() {
+        return this.playText ? 'Enter a song' : 'Enter a message'
       }
     },
     methods: {
-      sendMessage() {
-        if (this.message !== '') {
+      handleMessage() {
+        if (this.message === '') {
+          return
+        }
+        if (this.playText) {
+          this.$socket.emit('play', this.message)
+          this.message = ''
+        } else {
           this.$socket.emit('message', this.message)
         }
       },
@@ -77,6 +93,14 @@
 
         for(let i=0; i < maxHeight.length; i++) {
           maxHeight[i].style.height = `${availableHeight}px`
+        }
+      },
+
+      toggleMessage() {
+        if (!this.spin) {
+          this.spin = true
+          setTimeout(() => { this.spin = false }, 1000)
+          this.playText = !this.playText
         }
       }
     },
@@ -189,5 +213,18 @@
     }
     .row-3 {
         flex: 2 0 16%;
+    }
+    @keyframes spin {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
+    .riptides-icon {
+        animation-name: spin;
+        animation-duration: 1000ms;
+        animation-iteration-count: infinite;
     }
 </style>

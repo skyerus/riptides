@@ -26,7 +26,7 @@
                 />
                 <div class="flex-container ml-auto align-center">
                     <div class="pr-1">
-                        <v-btn icon flat>
+                        <v-btn icon flat @click="skip(index)">
                             <v-icon v-if="index === 0" size="25px">skip_next</v-icon>
                             <v-icon v-else size="25px">clear</v-icon>
                         </v-btn>
@@ -47,7 +47,12 @@
     },
     props: [
       'queue'
-    ]
+    ],
+    methods: {
+      skip(index) {
+        this.$socket.emit('skip', index)
+      }
+    }
   }
 </script>
 

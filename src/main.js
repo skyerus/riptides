@@ -13,10 +13,17 @@ import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 import './assets/img/favicon-16x16.png'
 import InfiniteLoading from 'vue-infinite-loading'
+import RiptidesIcon from './components/RiptidesIcon.vue'
 
 let VueScrollTo = require('vue-scrollto')
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  icons: {
+    'riptides': {
+      component: RiptidesIcon
+    }
+  }
+})
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueScrollTo)

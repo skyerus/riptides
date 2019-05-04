@@ -19,7 +19,7 @@
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <router-link :to="{ path: '/tides' }">
                 <div class="flex-container align-center">
-                    <img class="logo ml-3" src="../assets/img/riptides.svg" alt="riptides"><span class="title mr-5 hover-cursor ml-1" >riptides</span>
+                    <v-icon class="logo ml-3">$vuetify.icons.riptides</v-icon><span class="title mr-5 hover-cursor ml-1" >riptides</span>
                 </div>
             </router-link>
             <v-text-field
