@@ -6,9 +6,19 @@ pipeline {
         dockerImage = ''
     }
     stages {
-        stage('Cloning Git') {
+        stage('Cloning Git and prepping build') {
             steps {
                 sh 'git clone git@github.com:skyerus/riptides.git'
+                dir('riptides') {
+                    sh 'rm -f .env'
+                    sh 'mv .env.prod .env'
+                    sh 'npm install'
+                    sh 'npm run build'
+                    sh 'find ! -name \'Dockerfile\' -maxdepth 1 -type f -delete'
+                    sh 'rm -rf node_modules'
+                    sh 'rm -rf public_html'
+                    sh 'rm -rf src'
+                }
             }
         }
         stage('Building image') {
