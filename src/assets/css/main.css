@@ -32,6 +32,9 @@ html, body {
 .large-text {
     font-size: 19px;
 }
+.xl-text {
+    font-size: 30px;
+}
 .btn-bar {
     background-color: rgb(39, 39, 41);
 }
