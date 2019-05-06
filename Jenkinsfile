@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning Git and prepping build') {
             steps {
-                sh 'rm -r *'
+                sh 'rm -rf *'
                 sh 'git clone git@github.com:skyerus/riptides.git'
                 dir('riptides') {
                     sh 'mv .env.prod .env'
