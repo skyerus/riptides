@@ -8,9 +8,9 @@ pipeline {
     stages {
         stage('Cloning Git and prepping build') {
             steps {
+                sh 'rm -r *'
                 sh 'git clone git@github.com:skyerus/riptides.git'
                 dir('riptides') {
-                    sh 'rm -f .env'
                     sh 'mv .env.prod .env'
                     sh 'npm install'
                     sh 'npm run build'
