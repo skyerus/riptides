@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'text-center': center}" :style="{ marginLeft: marginLeft }">
+    <div :class="{'text-xs-center': center}" :style="{ marginLeft: marginLeft }">
         <router-link :to="`/${this.username}`">
             <v-avatar
                     class="center-block"
