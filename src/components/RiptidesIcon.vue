@@ -8,7 +8,6 @@
     props: {
       height: {
         type: String,
-        default: "auto"
       },
       floatLeft: {
         type: Boolean,
