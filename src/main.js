@@ -40,6 +40,10 @@ axios.defaults.baseURL = process.env.API_URL;
 let socketUrl = process.env.CHAT_SOCKET_URL;
 let debug = process.env.NODE_ENV !== 'prod';
 
+if (process.env.NODE_ENV === 'prod') {
+  Vue.config.devtools=false
+}
+
 Vue.use(new VueSocketIO({
     debug: debug,
     connection: SocketIO(socketUrl, {
