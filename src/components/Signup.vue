@@ -48,6 +48,7 @@
                                     type="password"
                                     v-model="confirmPassword"
                                     @input="$v.confirmPassword.$touch()"
+                                    @keyup.enter="signup"
                                     :error-messages="confirmPasswordErrors"
                                     required
                             >
