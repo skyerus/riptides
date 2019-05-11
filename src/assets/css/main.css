@@ -146,7 +146,7 @@ html, body {
 .flex-col-reverse {
     flex-direction: column-reverse;
 }
-.v-text-field__details {
+#message-bar .v-text-field__details {
     display: none !important;
 }
 .tag {
