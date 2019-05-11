@@ -42,7 +42,7 @@ export default {
       return response;
     }).catch((error) => {
       if (error.response.status === 409) {
-        store.dispatch('signupError', error.response.data.error).then(() => {
+        store.dispatch('signupError', error.response.data.message).then(() => {
           setTimeout(() => {
             store.dispatch('signupError', '')
           }, 5000);
