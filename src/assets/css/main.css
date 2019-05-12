@@ -218,3 +218,6 @@ html, body {
 .riptides-primary {
     filter: invert(36%) sepia(94%) saturate(3424%) hue-rotate(196deg) brightness(91%) contrast(81%)!important;
 }
+.float-right {
+    float:right;
+}

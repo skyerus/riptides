@@ -56,7 +56,7 @@
                         </v-flex>
                         <v-flex xs12>
                             <span class="red--text">
-                                {{ this.$store.getters.signupError }}
+                                {{ this.$store.getters.formError }}
                             </span>
                         </v-flex>
                     </v-layout>
@@ -99,10 +99,19 @@
         maxLength: maxLength(255)
       },
       confirmPassword: {
+        required,
         sameAs: sameAs('password')
       }
     },
     computed: {
+      open: {
+        get() {
+          return this.popupOpen
+        },
+        set() {
+          this.$emit('close')
+        }
+      },
       username: {
         get() {
           return this.$store.getters.usernameInput;
@@ -174,32 +183,20 @@
     },
     data() {
       return {
-        open: this.popupOpen,
         password: '',
         confirmPassword: '',
-      }
-    },
-    watch: {
-      popupOpen(val){
-        if (val !== this.open) {
-          this.open = val;
-        }
-      },
-      open(val){
-        if (this.open !== this.popupOpen) {
-          this.$emit('event');
-        }
       }
     },
     methods: {
       signup() {
         this.$v.$touch()
         if (this.$v.$invalid) {
-          this.$store.dispatch('signupError', 'Please fill in the form correctly')
-          setTimeout(() => { this.$store.dispatch('signupError', '') }, 5000)
-          return
+          return this.$store.dispatch('formError', {
+            message: 'Please fill in the form correctly',
+            timeout: 3000
+          })
         }
-        UserApi.signup(this.password).then((response) => {
+        UserApi.signup(this.password).then(() => {
           UserApi.login(this.password).then((response) => {
             this.$store.dispatch('updateToken', response.data.token).then(() => {
               UserApi.getMyConfig().then(() => {

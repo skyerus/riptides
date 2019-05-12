@@ -17,11 +17,10 @@ export default {
       return response;
     }).catch((error) => {
       if (error.response.status === 401) {
-        store.dispatch('loginError', 'Incorrect credentials').then(() => {
-          setTimeout(() => {
-            store.dispatch('loginError', '')
-          }, 5000);
-        });
+        store.dispatch('formError', {
+          message: 'Incorrect credentials',
+          timeout: 3000
+        })
       } else {
         store.dispatch('showSnackbar', 'Oops, something went wrong. Please try again later');
       }
@@ -42,11 +41,10 @@ export default {
       return response;
     }).catch((error) => {
       if (error.response.status === 409) {
-        store.dispatch('signupError', error.response.data.message).then(() => {
-          setTimeout(() => {
-            store.dispatch('signupError', '')
-          }, 5000);
-        });
+        store.dispatch('formError', {
+          message: error.response.data.message,
+          timeout: 3000
+        })
       } else {
         store.dispatch('showSnackbar', 'Oops, something went wrong. Please try again later');
       }
@@ -184,6 +182,25 @@ export default {
       this.getMyConfig()
     }).catch((error) => {
       handler.handleResponse(error, this.uploadAvatar, [file])
+    })
+  },
+
+  requestResetPassword(username) {
+    return axios({
+      method: 'post',
+      url: `api/user/${username}/forgot/password`,
+    })
+  },
+
+  resetPassword(username, token, password) {
+    return axios({
+      method: 'post',
+      url: 'api/user/reset/password',
+      data: {
+        username: username,
+        token: token,
+        password: password
+      }
     })
   }
 }

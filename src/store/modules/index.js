@@ -2,8 +2,7 @@ const getDefaultState = () => {
   return {
     isLoggedIn: false,
     loginPopup: false,
-    loginError: '',
-    signupError: '',
+    formError: '',
     headers: {
       "Content-Type": "application/json",
       "Authorization": ''
@@ -27,8 +26,7 @@ const getters = {
   snackbarActive: state => state.snackbar.active,
   snackbarText: state => state.snackbar.text,
   headers: state => state.headers,
-  loginError: state => state.loginError,
-  signupError: state => state.signupError,
+  formError: state => state.formError,
   config: state => state.config,
   spotify: state => state.config.spotify,
 };
@@ -60,12 +58,9 @@ const actions = {
     })
   },
 
-  loginError({commit, state}, text) {
-    commit('loginError', text);
-  },
-
-  signupError({commit}, text) {
-    commit('signupError', text);
+  formError({commit, state}, {message, timeout}) {
+    commit('formError', message)
+    setTimeout(() => { commit('formError', '') }, timeout)
   },
 
   snackbarText({commit, state}, text) {
@@ -106,11 +101,8 @@ const mutations = {
   snackbarText(state, text) {
     state.snackbar.text = text;
   },
-  loginError(state, text) {
-    state.loginError = text;
-  },
-  signupError(state, text) {
-    state.signupError = text;
+  formError(state, text) {
+    state.formError = text;
   },
   resetState (state) {
     Object.assign(state, getDefaultState())

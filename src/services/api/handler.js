@@ -5,10 +5,9 @@ export default {
     if (error.response.status === 401) {
       store.dispatch('toggleLoggedIn', false);
       store.dispatch('switchLoginPopup', true).then(() => {
-        store.dispatch('loginError', 'Your session has expired').then(() => {
-          setTimeout(() => {
-            store.dispatch('loginError', '')
-          }, 5000);
+        store.dispatch('formError', {
+          message: 'Your session has expired',
+          timeout: 3000
         })
       });
       store.dispatch('updateToken', '').then(() => {
