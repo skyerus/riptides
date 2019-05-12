@@ -14,6 +14,7 @@ import VueSocketIO from 'vue-socket.io'
 import './assets/img/favicon-16x16.png'
 import InfiniteLoading from 'vue-infinite-loading'
 import RiptidesIcon from './components/RiptidesIcon.vue'
+import SpotifyIcon from './components/SpotifyIcon.vue'
 
 let VueScrollTo = require('vue-scrollto')
 
@@ -21,6 +22,9 @@ Vue.use(Vuetify, {
   icons: {
     'riptides': {
       component: RiptidesIcon
+    },
+    'spotify': {
+      component: SpotifyIcon
     }
   }
 })

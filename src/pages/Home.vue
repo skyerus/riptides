@@ -1,33 +1,85 @@
 <template>
-    <div>
-        <div class="white--text blue-gradient header">
-            <div class="text-xs-center ma-auto icon-height">
-                <RiptidesIcon class="vertical-align-middle" height="100%"/>
-                <span class="pl-1 xl-text vertical-align-middle">riptides</span>
-            </div>
-            <div class="text-xs-center t-padding">
-                <span class="xl-text">
-                    Listen together
-                </span>
-            </div>
-        </div>
-        <v-layout class="pl-4 pt-5 pr-4 text-xs-center">
-            <v-flex sm12 md4>
-                <v-icon class="large-icon-2">group</v-icon><br>
-                <span class="subheader">rgrgdgdr</span>
-            </v-flex>
-            <v-flex sm12 md4>
-                <v-icon class="large-icon-2">queue</v-icon>
-            </v-flex>
-            <v-flex sm12 md4>
-                <v-icon class="large-icon-2">compare_arrows</v-icon>
-            </v-flex>
-        </v-layout>
-    </div>
+    <v-app dark>
+        <v-content>
+            <section>
+                <v-parallax :src="require('../assets/img/home-bg.png')" height="600">
+                    <v-layout
+                            column
+                            align-center
+                            justify-center
+                            class="white--text"
+                    >
+                        <RiptidesIcon class="vertical-align-middle" height="100px"/>
+                        <v-btn
+                                class="blue lighten-2 mt-5"
+                                dark
+                                large
+                                to="/tides"
+                        >
+                            Listen together
+                        </v-btn>
+                    </v-layout>
+                </v-parallax>
+            </section>
+            <section>
+                <v-layout
+                        column
+                        wrap
+                        class="my-5"
+                        align-center
+                >
+                    <v-flex xs12>
+                        <v-container grid-list-xl>
+                            <v-layout row wrap align-center>
+                                <v-flex xs12 md4>
+                                    <v-card class="elevation-0 transparent">
+                                        <v-card-text class="text-xs-center">
+                                            <v-icon x-large class="blue--text text--lighten-2">$vuetify.icons.spotify</v-icon>
+                                        </v-card-text>
+                                        <v-card-title primary-title class="layout justify-center">
+                                            <div class="headline text-xs-center">Spotify</div>
+                                        </v-card-title>
+                                        <v-card-text class="text-xs-center">
+                                            Connect your account to stream alongside others.
+                                        </v-card-text>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex xs12 md4>
+                                    <v-card class="elevation-0 transparent">
+                                        <v-card-text class="text-xs-center">
+                                            <v-icon x-large class="blue--text text--lighten-2">group</v-icon>
+                                        </v-card-text>
+                                        <v-card-title primary-title class="layout justify-center">
+                                            <div class="headline">Find a tide</div>
+                                        </v-card-title>
+                                        <v-card-text class="text-xs-center">
+                                            If you can't find a tide to suit your music tastes, create one.
+                                        </v-card-text>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex xs12 md4>
+                                    <v-card class="elevation-0 transparent">
+                                        <v-card-text class="text-xs-center">
+                                            <v-icon x-large class="blue--text text--lighten-2">queue</v-icon>
+                                        </v-card-text>
+                                        <v-card-title primary-title class="layout justify-center">
+                                            <div class="headline text-xs-center">Contribute</div>
+                                        </v-card-title>
+                                        <v-card-text class="text-xs-center">
+                                            Add songs to the communal queue & enjoy what others have to share.
+                                        </v-card-text>
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-flex>
+                </v-layout>
+            </section>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
-  import {store} from '../store'
   import RiptidesIcon from '../components/RiptidesIcon.vue'
 
   export default {
@@ -35,32 +87,14 @@
     components: {
       RiptidesIcon
     },
-    beforeRouteEnter(to, from, next) {
-      if (store.getters.isLoggedIn) {
-        next('/tides')
+    data() {
+      return {
+        title: 'Your logo'
       }
-      next()
     }
   }
 </script>
 
 <style scoped>
-    .header {
-        height: 30vh;
-        padding-top: 5vh;
-    }
-    .icon-height {
-        height: 10vh;
-    }
-    .t-padding {
-        padding-top: 2vh;
-    }
-    .subheader {
-        font-size: 24px;
-        line-height: 32px;
-        letter-spacing: -0.25px;
-        font-weight: 900;
-        color: #000;
-        margin: 0 0 12px;
-    }
+
 </style>
