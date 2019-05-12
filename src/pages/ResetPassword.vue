@@ -137,6 +137,9 @@
           }
         })
       }
+    },
+    beforeMount() {
+      this.$store.dispatch('switchLoginPopup', false)
     }
   }
 </script>

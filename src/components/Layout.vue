@@ -141,7 +141,7 @@
           this.$socket.close();
           this.$socket.io.opts.query = {token: this.$store.getters.headers.Authorization};
           this.$socket.open();
-          this.$router.push({name: 'home'});
+          this.$router.push('/tides');
         })
       },
       closeSnackbar() {

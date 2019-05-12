@@ -72,7 +72,6 @@
         },
         set() {
           if (!this.$store.getters.isLoggedIn) {
-            this.$router.push({name: 'home'});
             this.$store.dispatch('resetUserState');
             this.$store.dispatch('resetIndexState');
           }
@@ -94,6 +93,7 @@
             UserApi.getMyConfig().then(() => {
               this.$store.dispatch('toggleLoggedIn', true).then(() => {
                 this.open = false;
+                this.$router.push('/tides')
               });
             });
           });
