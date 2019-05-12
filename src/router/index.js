@@ -8,6 +8,7 @@ const Following = () => import('../pages/Following.vue')
 const Followers = () => import('../pages/Followers.vue')
 const UserTides = () => import('../pages/UserTides.vue')
 const Favorites = () => import('../pages/Favorites.vue')
+const ResetPassword = () => import('../pages/ResetPassword.vue')
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: '/settings',
     name: 'settings',
     component: Settings
+  },
+  {
+    path: '/reset/password',
+    name: 'resetPassword',
+    component: ResetPassword
   },
   {
     path: '/:username',
@@ -55,7 +61,7 @@ const routes = [
         component: Followers
       }
     ]
-  }
+  },
 ];
 
 export default new Router({

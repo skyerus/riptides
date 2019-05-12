@@ -31,10 +31,10 @@
             ></v-text-field>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
-                <Login :popupOpen="this.$store.getters.loginPopup" @event="closeLoginPopup"/>
-                <Signup :popupOpen="signupPopup" @event="switchSignupPopup"/>
-                <v-btn v-if="!this.$store.getters.isLoggedIn" @click="loginPopup" flat>LOG IN</v-btn>
-                <v-btn v-if="!this.$store.getters.isLoggedIn" @click="signupPopup = !signupPopup" flat>SIGN UP</v-btn>
+                <Login :popupOpen="this.$store.getters.loginPopup" @close="$store.dispatch('switchLoginPopup', false)"/>
+                <Signup :popupOpen="signupPopup" @close="signupPopup = false"/>
+                <v-btn v-if="!this.$store.getters.isLoggedIn" @click="$store.dispatch('switchLoginPopup', true)" flat>LOG IN</v-btn>
+                <v-btn v-if="!this.$store.getters.isLoggedIn" @click="signupPopup = true" flat>SIGN UP</v-btn>
                 <v-btn
                     icon
                     @click="logout()"
@@ -133,15 +133,6 @@
       }
     },
     methods: {
-      loginPopup() {
-        this.$store.dispatch('switchLoginPopup', true);
-      },
-      closeLoginPopup() {
-        this.$store.dispatch('switchLoginPopup', false);
-      },
-      switchSignupPopup() {
-        this.signupPopup = !this.signupPopup;
-      },
       logout() {
         Promise.all([
           this.$store.dispatch('resetUserState'),
@@ -150,7 +141,7 @@
           this.$socket.close();
           this.$socket.io.opts.query = {token: this.$store.getters.headers.Authorization};
           this.$socket.open();
-          this.$router.push({name: 'home'});
+          this.$router.push('/tides');
         })
       },
       closeSnackbar() {
