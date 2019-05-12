@@ -22,13 +22,13 @@
                     <v-icon class="logo ml-3">$vuetify.icons.riptides</v-icon><span class="title mr-5 hover-cursor ml-1" >riptides</span>
                 </div>
             </router-link>
-            <v-text-field
-                solo-inverted
-                flat
-                hide-details
-                label="Search"
-                prepend-inner-icon="search"
-            ></v-text-field>
+<!--            <v-text-field-->
+<!--                solo-inverted-->
+<!--                flat-->
+<!--                hide-details-->
+<!--                label="Search"-->
+<!--                prepend-inner-icon="search"-->
+<!--            ></v-text-field>-->
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
                 <Login :popupOpen="this.$store.getters.loginPopup" @close="$store.dispatch('switchLoginPopup', false)"/>
@@ -117,11 +117,6 @@
               title: 'Tides',
               icon: 'queue_music',
               url: '/tides'
-            },
-            {
-              title: 'Discover',
-              icon: 'my_location',
-              url: '/discover'
             },
             {
               title: 'Settings',

@@ -32,6 +32,9 @@ html, body {
 .large-text {
     font-size: 19px;
 }
+.xl-text {
+    font-size: 5vh;
+}
 .btn-bar {
     background-color: rgb(39, 39, 41);
 }
@@ -70,6 +73,9 @@ html, body {
 .vertical-align-top {
     vertical-align: top;
 }
+.vertical-align-middle {
+    vertical-align: middle;
+}
 .center-horizontal {
     position: absolute;
     left: 50%;
@@ -80,6 +86,9 @@ html, body {
 }
 .large-icon-1 {
     font-size: 40px;
+}
+.large-icon-2 {
+    font-size: 80px;
 }
 .height-85 {
     min-height: 85vh;
@@ -217,6 +226,14 @@ html, body {
 }
 .riptides-primary {
     filter: invert(36%) sepia(94%) saturate(3424%) hue-rotate(196deg) brightness(91%) contrast(81%)!important;
+}
+.blue-gradient {
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2193b0, #6dd5ed, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2193b0, #6dd5ed, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.float-left {
+    float:left;
 }
 .float-right {
     float:right;

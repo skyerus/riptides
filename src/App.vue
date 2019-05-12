@@ -1,6 +1,11 @@
 <template>
     <div id="app">
-        <v-app id="keep" dark>
+        <v-app v-if="$route.fullPath === '/'">
+            <div>
+                <router-view :key="$route.fullPath"></router-view>
+            </div>
+        </v-app>
+        <v-app v-else id="keep" dark>
             <Layout>
                 <router-view :key="$route.fullPath"></router-view>
             </Layout>
