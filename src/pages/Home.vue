@@ -21,7 +21,7 @@
                     </v-layout>
                 </v-parallax>
             </section>
-            <section>
+            <section id="info-section">
                 <v-layout
                         column
                         wrap
@@ -75,6 +75,14 @@
                     </v-flex>
                 </v-layout>
             </section>
+            <section>
+                <div class="flex flex-col">
+                    <div class="flex-item">
+                        <v-parallax :src="require('../assets/img/home-bg.png')" :height="height">
+                        </v-parallax>
+                    </div>
+                </div>
+            </section>
         </v-content>
     </v-app>
 </template>
@@ -89,12 +97,21 @@
     },
     data() {
       return {
-        title: 'Your logo'
+        title: 'Your logo',
+        height: '10px'
       }
+    },
+    mounted() {
+      this.height = document.body.clientHeight - document.getElementById('info-section').getBoundingClientRect().bottom
     }
   }
 </script>
 
 <style scoped>
-
+    .flex-col {
+        flex-direction: column;
+    }
+    .flex-item {
+        flex-grow: 1;
+    }
 </style>
