@@ -34,9 +34,9 @@
           offset: this.offset,
           limit: this.pageLength,
         }).then((response) => {
-          if (response.data.followers.length) {
-            this.followers.push(...response.data.followers)
-            if (response.data.followers.length !== this.pageLength) {
+          if (response.data !== null) {
+            this.followers.push(...response.data)
+            if (response.data.length !== this.pageLength) {
               return $state.complete()
             }
             $state.loaded()

@@ -8,7 +8,7 @@
         <v-card-text v-if="tide.about !== ''">
             <span>{{this.tide.about}}</span>
         </v-card-text>
-        <v-card-title v-if="tide.tags.length > 0">
+        <v-card-title v-if="tide.tags !== null && tide.tags.length > 0">
             <span class="headline nice-grey">Tags</span><v-spacer/><span v-for="tag in tide.tags" class="tag">{{ tag.name }}</span>
         </v-card-title>
         <v-card-title class="headline nice-grey">

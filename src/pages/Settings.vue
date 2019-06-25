@@ -10,15 +10,6 @@
                     <v-divider/>
                 </v-card-text>
                 <v-card-text>
-                    <span>Change email</span>
-                </v-card-text>
-                <v-card-text>
-                    <span>Change username</span>
-                </v-card-text>
-                <v-card-text>
-                    <span>Change password</span>
-                </v-card-text>
-                <v-card-text>
                     <span>Upload avatar: </span>
                     <input type="file" id="file" ref="file" v-on:change="handleFile"/>
                     <v-btn round color="primary" :loading="uploadLoading" @click="uploadFile(file)">Upload</v-btn>

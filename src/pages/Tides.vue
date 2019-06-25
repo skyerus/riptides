@@ -48,7 +48,7 @@
           offset: this.offset,
           limit: this.pageLength,
         }).then((response) => {
-          if (response.data.length) {
+          if (response.data !== null) {
             this.tides.push(...response.data)
             if (response.data.length !== this.pageLength) {
               return $state.complete()
